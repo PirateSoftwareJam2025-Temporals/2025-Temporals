@@ -28,3 +28,7 @@ debug_color = Color(0.753221, 0.457376, 0, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gm2kt")
+
+[node name="timeSlowLength" type="Timer" parent="."]
+
+[connection signal="timeout" from="timeSlowLength" to="." method="_on_time_slow_length_timeout"]
