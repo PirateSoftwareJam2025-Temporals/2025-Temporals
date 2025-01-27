@@ -1,0 +1,180 @@
+[gd_scene load_steps=21 format=3 uid="uid://bnhl8h0jc2rew"]
+
+[ext_resource type="Script" path="res://scripts/camera_gate.gd" id="1_wxr2m"]
+[ext_resource type="Texture2D" uid="uid://chiibji82x01g" path="res://Assets/Camera_Gate_Tileset.png" id="2_w0uvb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxhdn"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(0, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_was2c"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(32, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0rxx"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(48, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6haoo"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(64, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6k2v"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(80, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7scuw"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(96, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2c8n6"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(112, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_417bc"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(128, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmfj0"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(144, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngsoi"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(160, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_papvj"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(176, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rubd8"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(192, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3sky"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(208, 16, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j6qhv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxhdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_was2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0rxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6haoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6k2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7scuw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2c8n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_417bc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmfj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ngsoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_papvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rubd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3sky")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_e0xlu"]
+script/source = "extends AnimatedSprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk3md"]
+atlas = ExtResource("2_w0uvb")
+region = Rect2(20, 21, 8, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hv0y7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk3md")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aiwhv"]
+size = Vector2(7, 33)
+
+[node name="CameraGate" type="Node2D"]
+position = Vector2(-2, -1)
+script = ExtResource("1_wxr2m")
+
+[node name="Gate" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -15.555)
+sprite_frames = SubResource("SpriteFrames_j6qhv")
+frame_progress = 1.0
+script = SubResource("GDScript_e0xlu")
+
+[node name="Anchor" type="Node2D" parent="."]
+position = Vector2(6, -27)
+
+[node name="Camera" type="AnimatedSprite2D" parent="Anchor"]
+position = Vector2(3, -1)
+sprite_frames = SubResource("SpriteFrames_hv0y7")
+script = SubResource("GDScript_e0xlu")
+
+[node name="CameraVisual" type="Polygon2D" parent="."]
+color = Color(0.34902, 1, 1, 0.4)
+polygon = PackedVector2Array(8, -26, 2, 1, 73, 1, 10, -28)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -33)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+position = Vector2(-3, -15.5)
+shape = SubResource("RectangleShape2D_aiwhv")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2(0.44, 33)
+color = Color(0.898039, 0, 0, 0.2)
+polygon = PackedVector2Array(0, -32, -7, -32, -7, -65, 0, -65)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
+position = Vector2(0, -10)
+polygon = PackedVector2Array(74, 11, 0, 11, 0, -22, 10.0147, -17.534)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
