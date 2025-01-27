@@ -4,9 +4,11 @@ extends CharacterBody2D
 @onready var time_slow_length = $timeSlowLength
 
 var alive = true
-var speed = 200
-var jumpVelocity = -300.0
+const DEFAULT_SPEED = 200
+var speed = DEFAULT_SPEED
+var jumpVelocity = -250.0
 const dashDistance = 40
+var timeSlowAvailable = true
 
 func player():
 	pass #function check whether a body is the player
@@ -25,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		flip(direction)
 		if Input.is_action_just_pressed("dash"):
 			dash(direction)
-		if Input.is_action_just_pressed("time_slow"): #&& time_slow_length.timeout()
+		if Input.is_action_just_pressed("time_slow") && timeSlowAvailable: #&& time_slow_length.timeout()
 			time_slow()
 	elif alive == false:
 		velocity.x = 0
@@ -49,16 +51,16 @@ func dash(direction):
 # Allows the player to slow down time to assist with dodging 
 # bullets while also allowing the player to make it through
 # time slow required sections
-func time_slow():
+func time_slow(): # perhaps could have respawn timer so as not to waste the players time if they die in slowMo
 	Engine.time_scale = 0.2
-	# not quite as fast as normal
-	speed *= 4
-	# currently has moon gravity
-	jumpVelocity *= 2
-	time_slow_length.start() # might need to start on initialise
-	
+	# not quite as fast as normal so as not to be broken
+	speed *= 2
+	# bug where you can jump really high
+	timeSlowAvailable = false
+	time_slow_length.start()
 
+# weird bug where sometimes that speed doesn't go back to default
 func _on_time_slow_length_timeout():
 	Engine.time_scale = 1
-	speed /= 4
-	jumpVelocity /= 2
+	speed = DEFAULT_SPEED
+	timeSlowAvailable = true
