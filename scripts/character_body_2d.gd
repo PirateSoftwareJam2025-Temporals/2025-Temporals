@@ -4,14 +4,14 @@ extends CharacterBody2D
 @onready var time_slow_length = $timeSlowLength
 
 var alive = true
-const SPEED = 200
+const DEFAULT_SPEED = 200
 const JUMP_VELOCITY = -300.0
 const dashSpeed = 400
 const dashDist = 100
 var dashing = false
 var dashStart = 0
 var timeSlowAvailable = true
-
+var speed = DEFAULT_SPEED
 func player():
 	pass #function check whether a body is the player
  
@@ -46,9 +46,9 @@ func _physics_process(delta: float) -> void:
 
 func move(direction):
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * DEFAULT_SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, DEFAULT_SPEED)
 func flip(direction):
 	if direction < 0:
 		animated_sprite.flip_h = true
