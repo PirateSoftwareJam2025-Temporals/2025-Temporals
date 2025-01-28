@@ -4,9 +4,9 @@ extends Area2D
 
 
 func _on_body_entered(body):
-	if body.has_method("player"):
+	if body.has_method("player") && !body.dashing:
 		body.alive = false	# disables player controls
-		timer.start() # respawn timer		
+		timer.start() # respawn timer
 	elif body.has_method("enemy"): # if an enemy
 		body.queue_free()
 
