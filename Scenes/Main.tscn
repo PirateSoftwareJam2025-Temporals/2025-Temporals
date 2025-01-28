@@ -422,7 +422,7 @@ limit_bottom = 100
 position_smoothing_enabled = true
 
 [node name="LaserGate" parent="." instance=ExtResource("3_op3ly")]
-position = Vector2(-119.355, -32.45)
+position = Vector2(-132, 29)
 
 [node name="Killzone" parent="." instance=ExtResource("4_4fwo6")]
 
