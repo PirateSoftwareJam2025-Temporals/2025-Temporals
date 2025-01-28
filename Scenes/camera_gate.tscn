@@ -141,7 +141,7 @@ fill = 1
 fill_from = Vector2(0.490826, 0.486239)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aiwhv"]
-size = Vector2(7, 33)
+size = Vector2(7, 31.3779)
 
 [node name="CameraGate" type="Node2D"]
 position = Vector2(-2, -1)
@@ -181,17 +181,16 @@ texture = ExtResource("3_ajrui")
 texture_scale = 0.75
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, -33)
+position = Vector2(-2, -31)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-visible = false
-position = Vector2(-3, -15.5)
+position = Vector2(0, 16.1519)
 shape = SubResource("RectangleShape2D_aiwhv")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
-position = Vector2(0.44, 33)
+position = Vector2(4, 63.6816)
 color = Color(0.898039, 0, 0, 0.2)
-polygon = PackedVector2Array(0, -32, -7, -32, -7, -65, 0, -65)
+polygon = PackedVector2Array(0, -32, -8, -31.8408, -8, -63.6816, 0, -63.6816)
 
 [node name="Area2D" type="Area2D" parent="."]
 

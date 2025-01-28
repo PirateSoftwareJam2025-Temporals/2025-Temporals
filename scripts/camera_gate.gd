@@ -24,8 +24,7 @@ func _on_alarm_light_length_timeout():
 		alarm_light.enabled = true # turn light on
 		alternate = false
 		alarm_light_timer.start()
-	
-	
+
 func _on_area_2d_body_entered(body): # used _body because body is not used within the method
 	#static_body_2d.position.y = 0 # bring gate down
 	gate.speed_scale = -1 # play the animation in reverse to close the gate
@@ -47,12 +46,17 @@ func _on_area_2d_body_exited(_body):
 func _process(delta):	
 	if entered == true:
 		anchor.look_at(newBody.position)
+
+func _physics_process(delta):
+	if entered == true:
+		anchor.look_at(newBody.position)
 		changeGateState(-1, delta)
 	elif entered == false:
 		changeGateState(1, delta)
 
-func changeGateState(direction, delta): # direction is positive or negative for going up and down respectively
-	if static_body_2d.position.y > -33 && direction > 0:
-		static_body_2d.position.y -= 1 * delta
-	elif static_body_2d.position.y < 0:
-		static_body_2d.position.y += 1 * delta
+func changeGateState(direction, delta): # direction is positive for up or negative for down
+	var perTickAmount = 0.02 #0.001
+	if static_body_2d.scale.y > 0.2 && direction > 0:
+		static_body_2d.scale.y  -= perTickAmount * 0.5
+	elif static_body_2d.scale.y < 1:
+		static_body_2d.scale.y  += perTickAmount * 0.5
