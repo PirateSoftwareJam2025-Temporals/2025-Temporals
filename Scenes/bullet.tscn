@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_1wof0"]
 [ext_resource type="PackedScene" uid="uid://co6h71xm4qp0a" path="res://Scenes/killzone.tscn" id="1_52k55"]
-[ext_resource type="Texture2D" uid="uid://bh603q4jnt5pw" path="res://Assets/Turret_Tileset.png" id="3_ab3kp"]
+[ext_resource type="Texture2D" uid="uid://bh603q4jnt5pw" path="res://Assets/Animation Tilesets/Turret_Tileset.png" id="3_ab3kp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gscab"]
 size = Vector2(2.04865, 0.640342)

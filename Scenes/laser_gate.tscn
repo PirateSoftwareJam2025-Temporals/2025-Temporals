@@ -1,26 +1,28 @@
 [gd_scene load_steps=10 format=3 uid="uid://3c15nkulmo4p"]
 
 [ext_resource type="PackedScene" uid="uid://co6h71xm4qp0a" path="res://Scenes/killzone.tscn" id="1_67231"]
-[ext_resource type="Texture2D" uid="uid://brwhb7gyix5xl" path="res://Assets/Animated Tileset/Animated Tileset - Laser Gate.png" id="2_kit6b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcwlb"]
+load_path = "res://.godot/imported/Animated Tileset - Laser Gate.png-78ee12557b60333fecb209650a04f9d1.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tr2le"]
-atlas = ExtResource("2_kit6b")
+atlas = SubResource("CompressedTexture2D_lcwlb")
 region = Rect2(0, 16, 29, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wf2dl"]
-atlas = ExtResource("2_kit6b")
+atlas = SubResource("CompressedTexture2D_lcwlb")
 region = Rect2(29, 16, 29, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lqalh"]
-atlas = ExtResource("2_kit6b")
+atlas = SubResource("CompressedTexture2D_lcwlb")
 region = Rect2(58, 16, 29, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_30hqx"]
-atlas = ExtResource("2_kit6b")
+atlas = SubResource("CompressedTexture2D_lcwlb")
 region = Rect2(87, 16, 29, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r2n2o"]
-atlas = ExtResource("2_kit6b")
+atlas = SubResource("CompressedTexture2D_lcwlb")
 region = Rect2(116, 16, 29, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rw66d"]

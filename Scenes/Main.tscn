@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=4 uid="uid://xbtkp1qi3akn"]
 
-[ext_resource type="Texture2D" uid="uid://dgj3ws2b4a6rd" path="res://Assets/Tileset - Structural.png" id="2_6a8mg"]
-[ext_resource type="Texture2D" uid="uid://c5oo4pu8k5fwi" path="res://Assets/Tileset1.1/Tileset - Objects.png" id="2_5037p"]
+[ext_resource type="Texture2D" uid="uid://bw2ngbudddbhv" path="res://Assets/Level Tilesets/Tileset - Structural.png" id="2_6a8mg"]
+[ext_resource type="Texture2D" uid="uid://ctnntg8q4bxpx" path="res://Assets/Level Tilesets/Tileset - Objects.png" id="2_5037p"]
 [ext_resource type="PackedScene" uid="uid://ccqg5v6n6851q" path="res://Scenes/player.tscn" id="3_6dwv1"]
 [ext_resource type="PackedScene" uid="uid://3c15nkulmo4p" path="res://Scenes/laser_gate.tscn" id="3_op3ly"]
 [ext_resource type="PackedScene" uid="uid://co6h71xm4qp0a" path="res://Scenes/killzone.tscn" id="4_4fwo6"]
@@ -367,9 +367,7 @@ tile_set = SubResource("TileSet_yimng")
 [node name="Player" parent="." instance=ExtResource("3_6dwv1")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, 10)
 zoom = Vector2(4, 4)
-limit_bottom = 100
 position_smoothing_enabled = true
 
 [node name="LaserGate" parent="." instance=ExtResource("3_op3ly")]

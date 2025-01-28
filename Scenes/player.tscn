@@ -1,21 +1,126 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccqg5v6n6851q"]
+[gd_scene load_steps=19 format=3 uid="uid://ccqg5v6n6851q"]
 
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="1_2nvis"]
-[ext_resource type="Texture2D" uid="uid://rb2ryksv7x03" path="res://Assets/Animated Tileset - Player.png" id="2_v0bby"]
+[ext_resource type="Texture2D" uid="uid://bmtr8ljnf5e7q" path="res://Assets/Animation Tilesets/Animated Tileset - Player.png" id="2_v0bby"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_djyns"]
 radius = 6.0
 height = 20.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmcox"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wj63"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4lxb"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rghyp"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pmp7"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23dj7"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8tsa"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4uxj"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmxlk"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jnem"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hat4"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1tx3"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a3qg"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nn61f"]
+atlas = ExtResource("2_v0bby")
+region = Rect2(256, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_gm2kt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_v0bby")
+"texture": SubResource("AtlasTexture_fmcox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wj63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4lxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rghyp")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pmp7")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23dj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8tsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4uxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmxlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jnem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hat4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1tx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a3qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nn61f")
+}],
+"loop": true,
+"name": &"running",
+"speed": 10.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -27,8 +132,7 @@ shape = SubResource("CapsuleShape2D_djyns")
 debug_color = Color(0.753221, 0.457376, 0, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_gm2kt")
-
-[node name="timeSlowLength" type="Timer" parent="."]
-
-[connection signal="timeout" from="timeSlowLength" to="." method="_on_time_slow_length_timeout"]
+offset = Vector2(-7.545, -8.625)
