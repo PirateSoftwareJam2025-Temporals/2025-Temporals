@@ -32,9 +32,9 @@ func _on_area_2d_body_exited(body):
 func fire():
 	canFire = false
 	burstCounter += 1
-	if burstCounter != 3:
-		print("fireRate.start()")
-		fire_rate.start()
+	
+	print("fireRate.start()")
+	fire_rate.start()
 	var bullet = bulletPath.instantiate() # create a new instance of a bullet
 	add_child(bullet) # add the bullet as a child of turret
 	bullet.global_position = marker_2d.global_position
@@ -53,7 +53,7 @@ func rotateTowards(object, position): # position is a Vector2
 
 func _on_fire_rate_timeout():
 	print(burstCounter)
-	if burstCounter < 3:
+	if burstCounter <= 3:
 		canFire = true
 	else:
 		print("timer")

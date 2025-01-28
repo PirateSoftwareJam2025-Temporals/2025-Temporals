@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3err28ls02r5"]
+
+[ext_resource type="AudioStream" uid="uid://c3vj0ijsvtoj2" path="res://Assets/Music/SamuelBrien_GameJamComposition.wav" id="1_k1y2x"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_k1y2x")
+autoplay = true
+bus = &"Music"
+playback_type = 1
