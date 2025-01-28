@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://xbtkp1qi3akn"]
+[gd_scene load_steps=21 format=4 uid="uid://xbtkp1qi3akn"]
 
 [ext_resource type="Texture2D" uid="uid://dgj3ws2b4a6rd" path="res://Assets/Tileset - Structural.png" id="2_6a8mg"]
 [ext_resource type="Texture2D" uid="uid://c5oo4pu8k5fwi" path="res://Assets/Tileset1.1/Tileset - Objects.png" id="2_5037p"]
@@ -396,6 +396,23 @@ _data = {
 "move": SubResource("Animation_ggbya")
 }
 
+[sub_resource type="Gradient" id="Gradient_xu4ui"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m60jg"]
+gradient = SubResource("Gradient_xu4ui")
+fill = 1
+fill_from = Vector2(0.513761, 0.513761)
+
+[sub_resource type="Gradient" id="Gradient_vvhlv"]
+offsets = PackedFloat32Array(0.3, 0.662338)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_36rre"]
+gradient = SubResource("Gradient_vvhlv")
+fill = 1
+fill_from = Vector2(0.504587, 0.472477)
+
 [node name="root" type="Node"]
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
@@ -443,3 +460,30 @@ libraries = {
 "": SubResource("AnimationLibrary_4xr03")
 }
 autoplay = "move"
+
+[node name="Lighting" type="Node2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="Lighting"]
+visible = false
+position = Vector2(-23, -3)
+rotation = -1.55685
+texture = SubResource("GradientTexture2D_m60jg")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lighting"]
+position = Vector2(-102, 15)
+rotation = -1.55685
+texture = SubResource("GradientTexture2D_36rre")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
+position = Vector2(-22, 20)
+rotation = -1.55685
+texture = SubResource("GradientTexture2D_36rre")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Lighting"]
+position = Vector2(43, 18)
+rotation = -1.55685
+texture = SubResource("GradientTexture2D_36rre")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
+rotation = 0.187015
+color = Color(0.18174, 0.197606, 0.204341, 1)

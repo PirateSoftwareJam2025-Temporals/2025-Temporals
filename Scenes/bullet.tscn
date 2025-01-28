@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://btkiw03tiqfm8"]
+[gd_scene load_steps=5 format=3 uid="uid://btkiw03tiqfm8"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_1wof0"]
 [ext_resource type="PackedScene" uid="uid://co6h71xm4qp0a" path="res://Scenes/killzone.tscn" id="1_52k55"]
@@ -6,21 +6,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gscab"]
 size = Vector2(2.04865, 0.640342)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sidqk"]
-atlas = ExtResource("3_ab3kp")
-region = Rect2(64, 112, 5, 1)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vdbgc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sidqk")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Bullet" type="CharacterBody2D"]
 rotation = 1.5708
@@ -34,7 +19,9 @@ rotation = 1.5708
 scale = Vector2(4.86, 2.96)
 shape = SubResource("RectangleShape2D_gscab")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-rotation = 1.5708
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
 scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_vdbgc")
+texture = ExtResource("3_ab3kp")
+region_enabled = true
+region_rect = Rect2(63.9995, 112.001, 4.96444, 1.01379)
