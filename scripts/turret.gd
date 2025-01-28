@@ -3,30 +3,45 @@ extends Node2D
 @onready var barrel = $Barrel
 @onready var marker_2d = $BulletSpawn/Marker2D
 @onready var barrel_2 = $Barrel/Barrel2
-@onready var timer_fire_rate = $fireRate
+@onready var fire_rate = $fireRate
+@onready var point_light_2d = $PointLight2D
+@onready var explosion_light = $explosionLight
+@onready var reload_speed = $reloadSpeed
 
+var alreadyBeenHere = false
 const bulletPath = preload("res://Scenes/bullet.tscn")
 var bodyEntered = false
 var newBody
 var canFire = true
+var burstAmount = 3
+var burstCounter = 0
+
+func wait(seconds: float) -> void:
+	await get_tree().create_timer(seconds).timeout
+
 func _process(delta):
 	if bodyEntered == true:
 		rotateTowards(barrel, newBody.position)
-		if canFire:
+		if canFire == true:
 			fire()
 
 func _on_area_2d_body_entered(body):
 	newBody = body
 	if body.has_method("player"):
 		bodyEntered = true
-	
+func rotateTowards(object, position): # position is a Vector2
+	object.look_at(position) # default look_at() is 90 degrees off
+	object.rotate(3*TAU/4) # adjust with TAU == 2pi radians
 func _on_area_2d_body_exited(body):
 	if body.has_method("player"):
 		bodyEntered = false
 # need to delete bullets; after hitting something
 func fire():
+	print(burstAmount)
 	canFire = false
-	timer_fire_rate.start()
+	burstCounter += 1
+	print("fireRatestart()")
+	fire_rate.start()
 	var bullet = bulletPath.instantiate() # create a new instance of a bullet
 	add_child(bullet) # add the bullet as a child of turret
 	bullet.global_position = marker_2d.global_position
@@ -34,11 +49,23 @@ func fire():
 	rotateTowards(BulletSpawn, newBody.position)
 	rotateTowards(bullet, newBody.position)
 	bullet.velocity = newBody.global_position - bullet.global_position # find directional vector towards player
-	barrel_2.play("fire")
+	barrel_2.play("fire") # play fire animation
+	point_light_2d.enabled = true # display a light where the bullet is spawned
+	explosion_light.start()
 
-func rotateTowards(object, position): # position is a Vector2
-	object.look_at(position) # default look_at() is 90 degrees off
-	object.rotate(3*TAU/4) # adjust with TAU == 2pi radians
+func _on_reload_speed_timeout():
+	alreadyBeenHere = false
+	burstCounter = 0
+	print("reset")
+	canFire = true
+
+func _on_explosion_light_timeout():
+	point_light_2d.enabled = false
 
 func _on_fire_rate_timeout():
-	canFire = true
+	if burstCounter < 3:
+		canFire = true
+	else:
+		reload_speed.start()
+		alreadyBeenHere = true
+		#canFire = false

@@ -60,15 +60,11 @@ func flip(direction):
 # time slow required sections
 func time_slow(): # perhaps could have respawn timer so as not to waste the players time if they die in slowMo
 	Engine.time_scale = 0.2
-	# not quite as fast as normal so as not to be broken
-	speed *= 2
-	# bug where you can jump really high
 	timeSlowAvailable = false
 	time_slow_length.start()
 
 func _on_time_slow_length_timeout():
 	Engine.time_scale = 1
-	speed = DEFAULT_SPEED
 	timeSlowAvailable = true
 func dash(direction):
 	dashing = true
