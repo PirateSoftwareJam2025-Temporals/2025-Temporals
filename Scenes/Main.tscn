@@ -396,6 +396,7 @@ libraries = {
 autoplay = "move"
 
 [node name="Lighting" type="Node2D" parent="."]
+visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="Lighting"]
 visible = false
@@ -415,4 +416,4 @@ texture_scale = 0.7
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
 rotation = 0.187015
-color = Color(0.18174, 0.197606, 0.204341, 1)
+color = Color(0.303443, 0.326461, 0.336236, 1)

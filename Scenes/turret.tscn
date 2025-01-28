@@ -75,7 +75,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_glynq")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"turretExplosion",
 "speed": 5.0
 }]
 
@@ -155,12 +155,13 @@ one_shot = true
 [node name="reloadSpeed" type="Timer" parent="."]
 one_shot = true
 
-[node name="explosionLength" type="Timer" parent="."]
+[node name="explosionLight" type="Timer" parent="."]
+wait_time = 0.1
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_uvdoj")
-frame_progress = 0.0979406
+animation = &"turretExplosion"
 
 [node name="Barrel" type="Node2D" parent="."]
 position = Vector2(-1.19209e-07, 4)
@@ -200,9 +201,7 @@ color = Color(1, 1, 0, 1)
 texture = SubResource("GradientTexture2D_1x8e0")
 
 [connection signal="timeout" from="fireRate" to="." method="_on_fire_rate_timeout"]
-[connection signal="timeout" from="reloadSpeed" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="reloadSpeed" to="." method="_on_reload_speed_timeout"]
-[connection signal="timeout" from="explosionLength" to="." method="_on_explosion_length_timeout"]
-[connection signal="timeout" from="explosionLength" to="." method="_on_fire_rate_timeout"]
+[connection signal="timeout" from="explosionLight" to="." method="_on_explosion_light_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

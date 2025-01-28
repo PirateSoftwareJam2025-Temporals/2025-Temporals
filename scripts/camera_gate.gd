@@ -7,6 +7,7 @@ extends Node2D
 var newBody
 var entered = false
 var alternate = false
+var isTimeSlow = false
 func _ready(): 
 	await get_tree().create_timer(0.1).timeout # wait a second for the other assets to load in
 	static_body_2d.position.y = -33
@@ -49,13 +50,12 @@ func _process(delta):
 
 func _physics_process(delta):
 	if entered == true:
-		anchor.look_at(newBody.position)
-		changeGateState(-1, delta)
+		changeGateState(-1)
 	elif entered == false:
-		changeGateState(1, delta)
+		changeGateState(1)
 
-func changeGateState(direction, delta): # direction is positive for up or negative for down
-	var perTickAmount = 0.02 #0.001
+func changeGateState(direction): # direction is positive for up or negative for down
+	var perTickAmount = 0.02 * Engine.time_scale
 	if static_body_2d.scale.y > 0.2 && direction > 0:
 		static_body_2d.scale.y  -= perTickAmount * 0.5
 	elif static_body_2d.scale.y < 1:
