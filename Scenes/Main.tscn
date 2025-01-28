@@ -419,6 +419,7 @@ tile_set = SubResource("TileSet_5o0b7")
 position = Vector2(0, 10)
 zoom = Vector2(4, 4)
 limit_bottom = 100
+position_smoothing_enabled = true
 
 [node name="LaserGate" parent="." instance=ExtResource("3_op3ly")]
 position = Vector2(-132, 29)
