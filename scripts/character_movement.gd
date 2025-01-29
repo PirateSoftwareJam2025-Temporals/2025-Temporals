@@ -106,7 +106,6 @@ func dash():
 	velocity.x = animated_sprite.scale.x * dashSpeed # by using scale.x player still dashes in the direction they are facing when standing still
 	velocity.y = 0
 	dashStart = position.x
-
 func shoot():
 	var playerDirection = animated_sprite.scale.x
 	var bullet = PLAYER_BULLET.instantiate()
