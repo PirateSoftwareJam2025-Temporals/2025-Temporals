@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var grapple_cooldown_timer = $grappleCooldown
+@onready var stop_momentum_timer = $stopMomentum
 @onready var coyote_time = $coyoteTime
 @onready var jump_buffer_timer = $jumpBuffer
 @onready var marker_2d = $AnimatedSprite2D/Marker2D
@@ -15,10 +17,18 @@ var dashStart = 0
 var speed = DEFAULT_SPEED
 var buffered = 0
 var jumping = false
+const grappleSpeed = 250
+var grappling = false
+var stoppingMomentum = false
+
+# when doing the ui use the cooldown timers for each of the abilities using the time_left function
+
 func player():
 	pass #function check whether a body is the player
  
 func _physics_process(delta: float) -> void:
+		
+	
 	if dashing:
 		timeSlow() # playing should still be able to time slow while dashing
 		if abs(dashStart - position.x) >= dashDist || get_real_velocity().x == 0:
@@ -41,9 +51,12 @@ func _physics_process(delta: float) -> void:
 		jump()
 		jump_buffer_timer.stop()
 	# coyote time
-	if is_on_floor(): # start timer when on floor & because it is in process will
+	if is_on_floor(): # start a timer when last on the floor
 		coyote_time.start()
 		jumping = false
+		if stoppingMomentum == false: # return to typical movement after grappling
+			stop_momentum_timer.start()
+			stoppingMomentum = true
 	
 	# jump if coyote available and not currently jumping
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time.time_left != 0) and !jumping:
@@ -55,8 +68,8 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("running")
 	else:
 		animated_sprite.play("default")
-	if Input.is_action_just_pressed("dash") && direction:
-		dash(direction)
+	if Input.is_action_just_pressed("dash"):
+		dash()
 	timeSlow()
 	move_and_slide()
 	if Input.is_action_just_pressed("shoot"):
@@ -69,7 +82,7 @@ func jump():
 func move(direction):
 	if direction:
 		velocity.x = direction * DEFAULT_SPEED
-	else:
+	elif !grappling: # if grappling keep grappling velocity
 		velocity.x = move_toward(velocity.x, 0, DEFAULT_SPEED)
 func flip(direction):
 	if direction < 0:
@@ -86,11 +99,11 @@ func timeSlow():
 	elif Input.is_action_just_released("time_slow"):
 		Engine.time_scale = 1
 
-func dash(direction):
+func dash():
 	if dashing == false:# only play the dash animation the first time its pressed
 		animated_sprite.play("dash")
 	dashing = true
-	velocity.x = direction * dashSpeed
+	velocity.x = animated_sprite.scale.x * dashSpeed # by using scale.x player still dashes in the direction they are facing when standing still
 	velocity.y = 0
 	dashStart = position.x
 
@@ -104,4 +117,18 @@ func shoot():
 	bullet.velocity.y = 0
 	bullet.bulletSpeed = 200
 	print("bullet")
+	
+func grapple(nodePosition):
+	if grapple_cooldown_timer.time_left != 0:
+		return
+	grappling = true
+	var directionVector = nodePosition - global_position
+	velocity += directionVector.normalized() * grappleSpeed
+	grapple_cooldown_timer.start()
+
+
+func _on_stop_momentum_timeout():
+	if is_on_floor(): # check if player is still on floor
+		grappling = false
+		stoppingMomentum = false
 	

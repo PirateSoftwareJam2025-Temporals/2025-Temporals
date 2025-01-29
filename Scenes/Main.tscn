@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=4 uid="uid://xbtkp1qi3akn"]
+[gd_scene load_steps=20 format=4 uid="uid://xbtkp1qi3akn"]
 
+[ext_resource type="Script" path="res://Scenes/gameManager.gd" id="1_48phw"]
 [ext_resource type="Texture2D" uid="uid://bw2ngbudddbhv" path="res://Assets/Level Tilesets/Tileset - Structural.png" id="2_6a8mg"]
 [ext_resource type="Texture2D" uid="uid://ctnntg8q4bxpx" path="res://Assets/Level Tilesets/Tileset - Objects.png" id="2_5037p"]
 [ext_resource type="PackedScene" uid="uid://ccqg5v6n6851q" path="res://Scenes/player.tscn" id="3_6dwv1"]
@@ -7,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://co6h71xm4qp0a" path="res://Scenes/killzone.tscn" id="4_4fwo6"]
 [ext_resource type="PackedScene" uid="uid://bnhl8h0jc2rew" path="res://Scenes/camera_gate.tscn" id="5_pcy30"]
 [ext_resource type="PackedScene" uid="uid://caapa6p80eydk" path="res://Scenes/turret.tscn" id="6_t7n22"]
+[ext_resource type="PackedScene" uid="uid://ck3lmtwgsnbt8" path="res://Scenes/grapple_node.tscn" id="8_hl7ye"]
 [ext_resource type="PackedScene" uid="uid://br5gwx2wf2svd" path="res://Scenes/platform.tscn" id="8_txcax"]
 [ext_resource type="Texture2D" uid="uid://dtiucsjdertji" path="res://Assets/Textures/spotlight.png" id="9_bv68i"]
 
@@ -346,6 +348,7 @@ _data = {
 }
 
 [node name="root" type="Node"]
+script = ExtResource("1_48phw")
 
 [node name="Background" type="TileMapLayer" parent="."]
 position = Vector2(562, 33)
@@ -390,6 +393,9 @@ position = Vector2(267, -62)
 [node name="Turret2" parent="." instance=ExtResource("6_t7n22")]
 position = Vector2(751, 92.085)
 rotation = -3.14118
+
+[node name="GrappleNode" parent="." instance=ExtResource("8_hl7ye")]
+position = Vector2(113, -71)
 
 [node name="Platform" parent="." instance=ExtResource("8_txcax")]
 position = Vector2(179, 5)
