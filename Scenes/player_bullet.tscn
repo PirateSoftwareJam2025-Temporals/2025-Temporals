@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://o4je6m6diwqj"]
+
+[ext_resource type="Texture2D" uid="uid://bh603q4jnt5pw" path="res://Assets/Animation Tilesets/Turret_Tileset.png" id="1_62u62"]
+[ext_resource type="Script" path="res://Scenes/player_bullet.gd" id="1_t1ccn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dvvmy"]
+radius = 0.791132
+
+[sub_resource type="Gradient" id="Gradient_slolh"]
+offsets = PackedFloat32Array(0, 0.75974, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.0844156, 0.0844156, 0.0844156, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6kgt3"]
+gradient = SubResource("Gradient_slolh")
+fill = 1
+fill_from = Vector2(0.477064, 0.527523)
+
+[node name="playerBullet" type="CharacterBody2D"]
+rotation = 1.5708
+script = ExtResource("1_t1ccn")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+scale = Vector2(4.86, 2.96)
+shape = SubResource("CircleShape2D_dvvmy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.643319, 1, 0.614111, 1)
+position = Vector2(-0.295, 0)
+rotation = -1.5708
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("1_62u62")
+region_enabled = true
+region_rect = Rect2(153.356, 66.9348, 31.0665, 20.7655)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(2.98023e-08, -2.98023e-08)
+rotation = 1.5708
+scale = Vector2(0.0955022, 0.0955022)
+color = Color(0, 1, 0, 0.905882)
+texture = SubResource("GradientTexture2D_6kgt3")
+
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

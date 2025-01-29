@@ -1,14 +1,12 @@
 extends CharacterBody2D
 
+# note this is a universal script for both bullets
 var bulletVelocity = Vector2(0, 0)
-var bulletSpeed = 5000
-@onready var collision_shape_2d = $Killzone/CollisionShape2D
+var bulletSpeed = 100
 
 func _physics_process(delta):
-		velocity = velocity.normalized() * delta * bulletSpeed
-		move_and_slide()
+	velocity = velocity.normalized() * bulletSpeed
+	move_and_slide()
 
 func bullet():
 	pass
-#func _on_killzone_body_entered(body):
-	#queue_free()

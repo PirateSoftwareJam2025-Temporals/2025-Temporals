@@ -139,11 +139,18 @@ script = ExtResource("1_2nvis")
 position = Vector2(0, 2)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_gm2kt")
-animation = &"dash"
-frame_progress = 0.59044
 offset = Vector2(-7.025, -8.075)
+
+[node name="Marker2D" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(10, 1)
+rotation = 3.14159
+scale = Vector2(1, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_rahtq")
 debug_color = Color(0.753221, 0.457376, 0, 0.42)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="Anchor" type="Node2D" parent="."]

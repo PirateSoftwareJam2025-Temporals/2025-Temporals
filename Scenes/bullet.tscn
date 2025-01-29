@@ -7,11 +7,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gscab"]
 size = Vector2(2.04865, 0.640342)
 
-[sub_resource type="Gradient" id="Gradient_wuo7s"]
+[sub_resource type="Gradient" id="Gradient_k57dw"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_e2st7"]
-gradient = SubResource("Gradient_wuo7s")
+gradient = SubResource("Gradient_k57dw")
 
 [node name="Bullet" type="CharacterBody2D"]
 rotation = 1.5708
@@ -26,6 +26,7 @@ scale = Vector2(4.86, 2.96)
 shape = SubResource("RectangleShape2D_gscab")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.27374e-13, 5.96046e-08)
 rotation = -1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("3_ab3kp")

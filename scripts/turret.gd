@@ -15,7 +15,7 @@ var newBody
 var canFire = true
 var burstAmount = 3
 var burstCounter = 0
-
+var disabled = false
 
 
 func _process(delta):
@@ -25,8 +25,8 @@ func _process(delta):
 			fire()
 
 func _on_area_2d_body_entered(body):
-	newBody = body
-	if body.has_method("player"):
+	if body.has_method("player") and !disabled:
+		newBody = body
 		bodyEntered = true
 func rotateTowards(object, position): # position is a Vector2
 	object.look_at(position) # default look_at() is 90 degrees off
@@ -41,10 +41,10 @@ func fire():
 	fire_rate.start() # start the timer for the next bullet instance
 	var bullet = bulletPath.instantiate() # create a new instance of a bullet
 	add_child(bullet) # add the bullet as a child of turret
-	bullet.global_position = marker_2d.global_position # set new bullets starting position
 	# rotate the turret barrel & bullet spawn location to be faceing the player
 	rotateTowards(BulletSpawn, newBody.position)
 	rotateTowards(bullet, newBody.position)
+	bullet.global_position = marker_2d.global_position # set new bullets starting position
 	bullet.velocity = newBody.global_position - bullet.global_position # find directional vector towards player
 	barrel_2.play("fire") # play fire animation
 	point_light_2d.enabled = true # display a light where the bullet is spawned
@@ -62,4 +62,7 @@ func _on_fire_rate_timeout():
 		canFire = true
 	else:
 		reload_speed.start()
-		#canFire = false
+
+func disable():
+	disabled = true
+	pass

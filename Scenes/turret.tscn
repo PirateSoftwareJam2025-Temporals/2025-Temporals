@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://caapa6p80eydk"]
+[gd_scene load_steps=24 format=3 uid="uid://caapa6p80eydk"]
 
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_oitlh"]
 [ext_resource type="Texture2D" uid="uid://bh603q4jnt5pw" path="res://Assets/Animation Tilesets/Turret_Tileset.png" id="2_en7wx"]
@@ -12,6 +12,9 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_bak20")
 fill = 1
 fill_from = Vector2(0.5, 0.481651)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7oguy"]
+size = Vector2(42, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a216x"]
 atlas = ExtResource("2_en7wx")
@@ -143,18 +146,20 @@ radius = 88.5268
 [node name="Turret" type="Node2D"]
 script = ExtResource("1_oitlh")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
-scale = Vector2(1.5, 1.5)
-color = Color(0.34902, 1, 1, 0.4)
-polygon = PackedVector2Array(-89, 0, -86, 23, -77, 44, -63, 62, -44, 77, -23, 86, 0, 89, 23, 86, 45, 77, 63, 63, 77, 44, 86, 23, 89, 0, 86, -23, 77, -45, 63, -63, 45, -77, 23, -86, 0, -89, -23, -86, -45, -77, -63, -63, -77, -45, -86, -23)
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(1.5, 1.5)
 color = Color(0, 1, 1, 0.596078)
 energy = 0.5
 texture = SubResource("GradientTexture2D_at2rh")
 texture_scale = 2.75
+
+[node name="Hitbox" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_7oguy")
+disabled = true
 
 [node name="fireRate" type="Timer" parent="."]
 wait_time = 0.5
@@ -190,6 +195,12 @@ visible = false
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_dit6n")
 
+[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
+visible = false
+scale = Vector2(1.5, 1.5)
+color = Color(0.34902, 1, 1, 0.4)
+polygon = PackedVector2Array(-89, 0, -86, 23, -77, 44, -63, 62, -44, 77, -23, 86, 0, 89, 23, 86, 45, 77, 63, 63, 77, 44, 86, 23, 89, 0, 86, -23, 77, -45, 63, -63, 45, -77, 23, -86, 0, -89, -23, -86, -45, -77, -63, -63, -77, -45, -86, -23)
+
 [node name="BulletSpawn" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="BulletSpawn"]
@@ -208,6 +219,8 @@ enabled = false
 color = Color(1, 1, 0, 1)
 energy = 0.7
 texture = ExtResource("3_8qeio")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
 
 [connection signal="timeout" from="fireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="reloadSpeed" to="." method="_on_reload_speed_timeout"]

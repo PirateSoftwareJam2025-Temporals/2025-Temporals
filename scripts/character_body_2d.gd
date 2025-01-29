@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
+@onready var marker_2d = $AnimatedSprite2D/Marker2D
 @onready var animated_sprite = $AnimatedSprite2D
-
+const PLAYER_BULLET = preload("res://Scenes/player_bullet.tscn")
 var alive = true
 const DEFAULT_SPEED = 150
 const JUMP_VELOCITY = -300.0
@@ -25,8 +26,6 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	# perhaps not the best practice slamming it all into one if statement
-	# potentially could use a block statement to check if player is alive at start & if not pass
 	if alive == false:
 		velocity.x = 0
 		animated_sprite.modulate = Color(1,0.33,0.33,1)
@@ -42,13 +41,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		animated_sprite.play("default")
 	if Input.is_action_just_pressed("dash") && direction:
-		#if !dashing: # only play the dash animation the first time its pressed
-			#animated_sprite.play("dash")
 		dash(direction)
 	timeSlow()
-	
-		
 	move_and_slide()
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
 
 func move(direction):
 	if direction:
@@ -77,3 +74,15 @@ func dash(direction):
 	velocity.x = direction * dashSpeed
 	velocity.y = 0
 	dashStart = position.x
+
+func shoot():
+	var playerDirection = animated_sprite.scale.x
+	var bullet = PLAYER_BULLET.instantiate()
+	add_child(bullet)
+	bullet.top_level = true # do not alter the bullets position when the player moves
+	bullet.global_position = marker_2d.global_position
+	bullet.velocity.x = playerDirection
+	bullet.velocity.y = 0
+	bullet.bulletSpeed = 200
+	print("bullet")
+	
