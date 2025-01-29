@@ -27,6 +27,8 @@ func _on_alarm_light_length_timeout():
 		alarm_light_timer.start()
 
 func _on_area_2d_body_entered(body): # used _body because body is not used within the method
+	if !body.has_method("player"): # don't alarm if not player
+		return
 	#static_body_2d.position.y = 0 # bring gate down
 	gate.speed_scale = -1 # play the animation in reverse to close the gate
 	gate.play("default") # play animations

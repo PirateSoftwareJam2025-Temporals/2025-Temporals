@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://xbtkp1qi3akn"]
+[gd_scene load_steps=18 format=4 uid="uid://xbtkp1qi3akn"]
 
 [ext_resource type="Texture2D" uid="uid://bw2ngbudddbhv" path="res://Assets/Level Tilesets/Tileset - Structural.png" id="2_6a8mg"]
 [ext_resource type="Texture2D" uid="uid://ctnntg8q4bxpx" path="res://Assets/Level Tilesets/Tileset - Objects.png" id="2_5037p"]
@@ -345,14 +345,6 @@ _data = {
 "move": SubResource("Animation_ggbya")
 }
 
-[sub_resource type="Gradient" id="Gradient_xu4ui"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_m60jg"]
-gradient = SubResource("Gradient_xu4ui")
-fill = 1
-fill_from = Vector2(0.513761, 0.513761)
-
 [node name="root" type="Node"]
 
 [node name="Background" type="TileMapLayer" parent="."]
@@ -410,19 +402,13 @@ autoplay = "move"
 
 [node name="Lighting" type="Node2D" parent="."]
 
-[node name="PointLight2D" type="PointLight2D" parent="Lighting"]
-visible = false
-position = Vector2(-23, -3)
-rotation = -1.55685
-texture = SubResource("GradientTexture2D_m60jg")
-
 [node name="PointLight2D4" type="PointLight2D" parent="Lighting"]
 position = Vector2(43, 10)
 texture = ExtResource("9_bv68i")
 texture_scale = 0.7
 
 [node name="PointLight2D5" type="PointLight2D" parent="Lighting"]
-position = Vector2(-101, 11)
+position = Vector2(-21, 10)
 texture = ExtResource("9_bv68i")
 texture_scale = 0.7
 

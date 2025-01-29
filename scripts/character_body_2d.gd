@@ -27,24 +27,26 @@ func _physics_process(delta: float) -> void:
 	
 	# perhaps not the best practice slamming it all into one if statement
 	# potentially could use a block statement to check if player is alive at start & if not pass
-	if alive == true:
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
-		var direction := Input.get_axis("move_left", "move_right")
-		move(direction)
-		flip(direction)
-		if direction != 0 and is_on_floor(): # if not idle
-			animated_sprite.play("running")
-		else:
-			animated_sprite.play("default")
-		if Input.is_action_just_pressed("dash") && direction:
-			#if !dashing: # only play the dash animation the first time its pressed
-				#animated_sprite.play("dash")
-			dash(direction)
-		timeSlow()
-	elif alive == false:
+	if alive == false:
 		velocity.x = 0
 		animated_sprite.modulate = Color(1,0.33,0.33,1)
+		return # if not alive skip movement
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	var direction := Input.get_axis("move_left", "move_right")
+	move(direction)
+	flip(direction)
+	if direction != 0 and is_on_floor(): # if not idle
+		animated_sprite.play("running")
+	else:
+		animated_sprite.play("default")
+	if Input.is_action_just_pressed("dash") && direction:
+		#if !dashing: # only play the dash animation the first time its pressed
+			#animated_sprite.play("dash")
+		dash(direction)
+	timeSlow()
+	
 		
 	move_and_slide()
 
