@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm2dv2pr3iopw"]
+
+[ext_resource type="Script" path="res://scripts/camera_change.gd" id="1_5oghs"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c54qo"]
+normal = Vector2(1, 0)
+
+[node name="Camera2D" type="Camera2D"]
+zoom = Vector2(3, 3)
+script = ExtResource("1_5oghs")
+
+[node name="RightBoundary2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary2"]
+position = Vector2(189, -3)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_c54qo")
+
+[node name="LeftBoundary2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary2"]
+position = Vector2(-189, -3)
+shape = SubResource("WorldBoundaryShape2D_c54qo")
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="body_entered" from="RightBoundary2" to="." method="_on_right_boundary_2_body_entered"]
+[connection signal="body_entered" from="LeftBoundary2" to="." method="_on_left_boundary_2_body_entered"]

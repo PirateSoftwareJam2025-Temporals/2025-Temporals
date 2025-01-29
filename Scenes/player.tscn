@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://ccqg5v6n6851q"]
 
-[ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="1_2nvis"]
+[ext_resource type="Script" path="res://scripts/character_movement.gd" id="1_2nvis"]
 [ext_resource type="Texture2D" uid="uid://bmtr8ljnf5e7q" path="res://Assets/Animation Tilesets/Animated Tileset - Player.png" id="2_v0bby"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fmcox"]
