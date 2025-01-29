@@ -44,8 +44,8 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor(): # start timer when on floor & because it is in process will
 		coyote_time.start()
 		jumping = false
-		
-	# currently its possible to double jump OOPS
+	
+	# jump if coyote available and not currently jumping
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time.time_left != 0) and !jumping:
 		jump()
 	var direction := Input.get_axis("move_left", "move_right")
