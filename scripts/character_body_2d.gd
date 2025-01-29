@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var coyote_time = $coyoteTime
+@onready var jump_buffer_timer = $jumpBuffer
 @onready var marker_2d = $AnimatedSprite2D/Marker2D
 @onready var animated_sprite = $AnimatedSprite2D
 const PLAYER_BULLET = preload("res://Scenes/player_bullet.tscn")
@@ -11,6 +13,8 @@ const dashDist = 50
 var dashing = false
 var dashStart = 0
 var speed = DEFAULT_SPEED
+var buffered = 0
+var jumping = false
 func player():
 	pass #function check whether a body is the player
  
@@ -30,9 +34,20 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		animated_sprite.modulate = Color(1,0.33,0.33,1)
 		return # if not alive skip movement
-	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	# jump buffer: if jump is pressed just before they hit the floor
+	if Input.is_action_just_pressed("jump") and !is_on_floor():
+		jump_buffer_timer.start()
+	if jump_buffer_timer.time_left != 0 and is_on_floor():
+		jump()
+		jump_buffer_timer.stop()
+	# coyote time
+	if is_on_floor(): # start timer when on floor & because it is in process will
+		coyote_time.start()
+		jumping = false
+		
+	# currently its possible to double jump OOPS
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time.time_left != 0) and !jumping:
+		jump()
 	var direction := Input.get_axis("move_left", "move_right")
 	move(direction)
 	flip(direction)
@@ -46,6 +61,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
+
+func jump():
+	velocity.y = JUMP_VELOCITY
+	jumping = true
 
 func move(direction):
 	if direction:

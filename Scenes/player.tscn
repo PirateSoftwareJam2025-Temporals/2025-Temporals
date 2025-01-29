@@ -151,6 +151,10 @@ position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_rahtq")
 debug_color = Color(0.753221, 0.457376, 0, 0.42)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="jumpBuffer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
-[node name="Anchor" type="Node2D" parent="."]
+[node name="coyoteTime" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

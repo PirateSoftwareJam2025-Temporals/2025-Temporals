@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://o4je6m6diwqj"]
 
 [ext_resource type="Texture2D" uid="uid://bh603q4jnt5pw" path="res://Assets/Animation Tilesets/Turret_Tileset.png" id="1_62u62"]
-[ext_resource type="Script" path="res://Scenes/player_bullet.gd" id="1_t1ccn"]
+[ext_resource type="Script" path="res://scripts/player_bullet.gd" id="1_t1ccn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dvvmy"]
 radius = 0.791132
