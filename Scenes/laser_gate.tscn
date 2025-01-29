@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://3c15nkulmo4p"]
+[gd_scene load_steps=16 format=3 uid="uid://3c15nkulmo4p"]
 
 [ext_resource type="PackedScene" uid="uid://co6h71xm4qp0a" path="res://Scenes/killzone.tscn" id="1_67231"]
 [ext_resource type="Texture2D" uid="uid://cc1k6rfmhlhda" path="res://Assets/Animation Tilesets/Animated Tileset - Laser Gate.png" id="2_ccnwc"]
@@ -23,6 +23,22 @@ region = Rect2(89, 16, 29, 32)
 atlas = ExtResource("2_ccnwc")
 region = Rect2(118, 16, 29, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_okajm"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(1, 16, 23, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0slu"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(33, 16, 23, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vclqo"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(65, 16, 23, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7vc6"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(97, 16, 23, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_rw66d"]
 animations = [{
 "frames": [{
@@ -44,19 +60,50 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okajm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0slu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vclqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7vc6")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_87xkk"]
-size = Vector2(14, 28)
+size = Vector2(6, 28)
+
+[sub_resource type="Gradient" id="Gradient_7ta02"]
+offsets = PackedFloat32Array(0, 0.396104, 0.616883, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cn5cr"]
+gradient = SubResource("Gradient_7ta02")
 
 [node name="LaserGate" instance=ExtResource("1_67231")]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(-2.5, -16)
 sprite_frames = SubResource("SpriteFrames_rw66d")
-autoplay = "default"
-frame_progress = 0.864225
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.386338
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
-position = Vector2(0.5, -14)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(-3, -14)
 shape = SubResource("RectangleShape2D_87xkk")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="2"]
+position = Vector2(-3, -14)
+scale = Vector2(0.09375, 0.437501)
+color = Color(1, 0, 1, 0.686275)
+texture = SubResource("GradientTexture2D_cn5cr")

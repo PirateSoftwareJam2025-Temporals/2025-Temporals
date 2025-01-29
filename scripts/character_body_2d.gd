@@ -15,7 +15,7 @@ func player():
  
 func _physics_process(delta: float) -> void:
 	if dashing:
-		
+		timeSlow() # playing should still be able to time slow while dashing
 		if abs(dashStart - position.x) >= dashDist || get_real_velocity().x == 0:
 			dashing = false
 			return
@@ -41,10 +41,7 @@ func _physics_process(delta: float) -> void:
 			#if !dashing: # only play the dash animation the first time its pressed
 				#animated_sprite.play("dash")
 			dash(direction)
-		if Input.is_action_just_pressed("time_slow"): #&& time_slow_length.timeout()
-			Engine.time_scale = 0.2
-		elif Input.is_action_just_released("time_slow"):
-			Engine.time_scale = 1
+		timeSlow()
 	elif alive == false:
 		velocity.x = 0
 		animated_sprite.modulate = Color(1,0.33,0.33,1)
@@ -65,7 +62,11 @@ func flip(direction):
 # Allows the player to slow down time to assist with dodging 
 # bullets while also allowing the player to make it through
 # time slow required sections
-
+func timeSlow():
+	if Input.is_action_just_pressed("time_slow"): #&& time_slow_length.timeout()
+		Engine.time_scale = 0.2
+	elif Input.is_action_just_released("time_slow"):
+		Engine.time_scale = 1
 
 func dash(direction):
 	if dashing == false:# only play the dash animation the first time its pressed
