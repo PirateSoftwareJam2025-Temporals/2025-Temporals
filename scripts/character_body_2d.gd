@@ -3,10 +3,10 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 
 var alive = true
-const DEFAULT_SPEED = 200
+const DEFAULT_SPEED = 150
 const JUMP_VELOCITY = -300.0
-const dashSpeed = 400
-const dashDist = 100
+const dashSpeed = 250
+const dashDist = 50
 var dashing = false
 var dashStart = 0
 var speed = DEFAULT_SPEED
@@ -15,6 +15,7 @@ func player():
  
 func _physics_process(delta: float) -> void:
 	if dashing:
+		
 		if abs(dashStart - position.x) >= dashDist || get_real_velocity().x == 0:
 			dashing = false
 			return
@@ -32,8 +33,13 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("move_left", "move_right")
 		move(direction)
 		flip(direction)
-		animated_sprite.play("running")
+		if direction != 0 and is_on_floor(): # if not idle
+			animated_sprite.play("running")
+		else:
+			animated_sprite.play("default")
 		if Input.is_action_just_pressed("dash") && direction:
+			#if !dashing: # only play the dash animation the first time its pressed
+				#animated_sprite.play("dash")
 			dash(direction)
 		if Input.is_action_just_pressed("time_slow"): #&& time_slow_length.timeout()
 			Engine.time_scale = 0.2
@@ -62,6 +68,8 @@ func flip(direction):
 
 
 func dash(direction):
+	if dashing == false:# only play the dash animation the first time its pressed
+		animated_sprite.play("dash")
 	dashing = true
 	velocity.x = direction * dashSpeed
 	velocity.y = 0

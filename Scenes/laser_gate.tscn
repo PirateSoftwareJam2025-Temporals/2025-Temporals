@@ -1,47 +1,45 @@
 [gd_scene load_steps=10 format=3 uid="uid://3c15nkulmo4p"]
 
 [ext_resource type="PackedScene" uid="uid://co6h71xm4qp0a" path="res://Scenes/killzone.tscn" id="1_67231"]
+[ext_resource type="Texture2D" uid="uid://cc1k6rfmhlhda" path="res://Assets/Animation Tilesets/Animated Tileset - Laser Gate.png" id="2_ccnwc"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcwlb"]
-load_path = "res://.godot/imported/Animated Tileset - Laser Gate.png-78ee12557b60333fecb209650a04f9d1.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5uvf"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(2, 16, 29, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tr2le"]
-atlas = SubResource("CompressedTexture2D_lcwlb")
-region = Rect2(0, 16, 29, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_i20bk"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(31, 16, 29, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wf2dl"]
-atlas = SubResource("CompressedTexture2D_lcwlb")
-region = Rect2(29, 16, 29, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj4rb"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(60, 16, 29, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lqalh"]
-atlas = SubResource("CompressedTexture2D_lcwlb")
-region = Rect2(58, 16, 29, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvpot"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(89, 16, 29, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_30hqx"]
-atlas = SubResource("CompressedTexture2D_lcwlb")
-region = Rect2(87, 16, 29, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r2n2o"]
-atlas = SubResource("CompressedTexture2D_lcwlb")
-region = Rect2(116, 16, 29, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lh6wb"]
+atlas = ExtResource("2_ccnwc")
+region = Rect2(118, 16, 29, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rw66d"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tr2le")
+"texture": SubResource("AtlasTexture_b5uvf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wf2dl")
+"texture": SubResource("AtlasTexture_i20bk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lqalh")
+"texture": SubResource("AtlasTexture_tj4rb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_30hqx")
+"texture": SubResource("AtlasTexture_cvpot")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r2n2o")
+"texture": SubResource("AtlasTexture_lh6wb")
 }],
 "loop": true,
 "name": &"default",
@@ -57,6 +55,7 @@ size = Vector2(14, 28)
 position = Vector2(-2.5, -16)
 sprite_frames = SubResource("SpriteFrames_rw66d")
 autoplay = "default"
+frame_progress = 0.864225
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 position = Vector2(0.5, -14)

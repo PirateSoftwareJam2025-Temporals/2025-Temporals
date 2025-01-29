@@ -77,10 +77,19 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rghyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rghyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wj63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmcox")
 }],
 "loop": true,
 "name": &"dash",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -135,4 +144,6 @@ debug_color = Color(0.753221, 0.457376, 0, 0.42)
 position = Vector2(0, 2)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_gm2kt")
+animation = &"dash"
+frame_progress = 0.59044
 offset = Vector2(-7.545, -8.625)

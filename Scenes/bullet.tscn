@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://btkiw03tiqfm8"]
+[gd_scene load_steps=7 format=3 uid="uid://btkiw03tiqfm8"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_1wof0"]
 [ext_resource type="PackedScene" uid="uid://co6h71xm4qp0a" path="res://Scenes/killzone.tscn" id="1_52k55"]
@@ -6,6 +6,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gscab"]
 size = Vector2(2.04865, 0.640342)
+
+[sub_resource type="Gradient" id="Gradient_wuo7s"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e2st7"]
+gradient = SubResource("Gradient_wuo7s")
 
 [node name="Bullet" type="CharacterBody2D"]
 rotation = 1.5708
@@ -25,3 +31,12 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_ab3kp")
 region_enabled = true
 region_rect = Rect2(63.9995, 112.001, 4.96444, 1.01379)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0.023318, 0.0173827)
+rotation = 1.5708
+scale = Vector2(0.0388533, 2.01757)
+color = Color(1, 1, 0, 0.717647)
+texture = SubResource("GradientTexture1D_e2st7")
+
+[connection signal="body_entered" from="Killzone" to="." method="_on_killzone_body_entered"]

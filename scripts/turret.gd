@@ -4,7 +4,7 @@ extends Node2D
 @onready var marker_2d = $BulletSpawn/Marker2D
 @onready var barrel_2 = $Barrel/Barrel2
 @onready var fire_rate = $fireRate
-@onready var point_light_2d = $PointLight2D
+@onready var point_light_2d = $BulletSpawn/PointLight2D
 @onready var explosion_light = $explosionLight
 @onready var reload_speed = $reloadSpeed
 
@@ -16,8 +16,7 @@ var canFire = true
 var burstAmount = 3
 var burstCounter = 0
 
-func wait(seconds: float) -> void:
-	await get_tree().create_timer(seconds).timeout
+
 
 func _process(delta):
 	if bodyEntered == true:
@@ -37,14 +36,12 @@ func _on_area_2d_body_exited(body):
 		bodyEntered = false
 # need to delete bullets; after hitting something
 func fire():
-	print(burstAmount)
 	canFire = false
-	burstCounter += 1
-	print("fireRatestart()")
-	fire_rate.start()
+	burstCounter += 1 # add this bullet to the burstCount
+	fire_rate.start() # start the timer for the next bullet instance
 	var bullet = bulletPath.instantiate() # create a new instance of a bullet
 	add_child(bullet) # add the bullet as a child of turret
-	bullet.global_position = marker_2d.global_position
+	bullet.global_position = marker_2d.global_position # set new bullets starting position
 	# rotate the turret barrel & bullet spawn location to be faceing the player
 	rotateTowards(BulletSpawn, newBody.position)
 	rotateTowards(bullet, newBody.position)
@@ -54,9 +51,7 @@ func fire():
 	explosion_light.start()
 
 func _on_reload_speed_timeout():
-	alreadyBeenHere = false
 	burstCounter = 0
-	print("reset")
 	canFire = true
 
 func _on_explosion_light_timeout():
@@ -67,5 +62,4 @@ func _on_fire_rate_timeout():
 		canFire = true
 	else:
 		reload_speed.start()
-		alreadyBeenHere = true
 		#canFire = false
