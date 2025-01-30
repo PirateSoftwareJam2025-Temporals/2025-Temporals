@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+@onready var player_ = $"."
 @onready var grapple_cooldown_timer = $grappleCooldown
 @onready var stop_momentum_timer = $stopMomentum
 @onready var coyote_time = $coyoteTime
@@ -24,17 +24,24 @@ var maxAirDeceleration = 400
 var turnSpeed
 var maxTurnSpeed = 800
 var maxAirTurnSpeed = 600
-const JUMP_VELOCITY = -250.0
+# Jump
+const jumpHeight = 1000.0
 var desiredJump = false
 var newGravity
+var defaultGravity = 980
 var gravityScale = 980
-
+var gravMultiplier = 1
+var downwardMovementMultiplier = -1.6
+var jumpSpeed = 300
+var timeToJumpApex = 0.2
+var jumping = false
+# Dash
 const dashSpeed = 250
 const dashDist = 50
 var dashing = false
 var dashStart = 0
 var buffered = 0
-var jumping = false
+
 const grappleSpeed = 250
 var grappling = false
 var stoppingMomentum = false
@@ -44,9 +51,18 @@ var stoppingMomentum = false
 
 func player():
 	pass #function check whether a body is the player
- 
+
+func _process(delta):
+	pass
+
+
 func _physics_process(delta: float) -> void:
-		
+	velocity = player_.velocity
+	onGround = is_on_floor()
+	newGravity = Vector2(0, (-2 * jumpHeight) / (timeToJumpApex * timeToJumpApex))
+	gravityScale = ((newGravity.y*10) / defaultGravity) * gravMultiplier
+	if not is_on_floor():
+		velocity.y += gravityScale * delta
 	
 	if dashing:
 		timeSlow() # playing should still be able to time slow while dashing
@@ -56,8 +72,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	# Add gravity.
-	if not is_on_floor():
-		velocity.y += gravityScale * delta
+	
 	
 	if alive == false:
 		velocity.x = 0
@@ -67,19 +82,22 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and !is_on_floor():
 		jump_buffer_timer.start()
 	if jump_buffer_timer.time_left != 0 and is_on_floor():
-		jump()
+		desiredJump = true
 		jump_buffer_timer.stop()
 	# coyote time
 	if is_on_floor(): # start a timer when last on the floor
 		coyote_time.start()
 		jumping = false
-		if stoppingMomentum == false: # return to typical movement after grappling
-			stop_momentum_timer.start()
-			stoppingMomentum = true
+		#if stoppingMomentum == false: # return to typical movement after grappling
+			#stop_momentum_timer.start()
+			#stoppingMomentum = true
 	
 	# jump if coyote available and not currently jumping
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time.time_left != 0) and !jumping:
-		jump()
+		desiredJump = true
+	
+	
+	# Horizontal Movement
 	var direction := Input.get_axis("move_left", "move_right")
 	move(direction, delta)
 	flip(direction)
@@ -94,9 +112,29 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 		emit_signal("shootSignal")
+	
+	if (desiredJump):
+		print("jump")
+		doAJump()
+		return
+	
+	if (velocity.y == 0):
+		gravMultiplier = 1
+	if (velocity.y < -0.01):
+		gravMultiplier = downwardMovementMultiplier
+	
+	
 
-func jump():
-	velocity.y = JUMP_VELOCITY
+
+func doAJump():
+	desiredJump = false
+	jumpSpeed = sqrt(sqrt(-2 * defaultGravity * gravityScale * jumpHeight))
+	print(jumpSpeed)
+	#if (velocity.y > 0): # if jumping
+		#jumpSpeed = max(jumpSpeed - velocity.y, 0)
+	#elif velocity.y < 0:
+		#jumpSpeed += abs(velocity.y)
+	velocity.y += -jumpSpeed
 	jumping = true
 
 func move(direction, delta):
