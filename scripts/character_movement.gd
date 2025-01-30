@@ -6,20 +6,39 @@ extends CharacterBody2D
 @onready var jump_buffer_timer = $jumpBuffer
 @onready var marker_2d = $AnimatedSprite2D/Marker2D
 @onready var animated_sprite = $AnimatedSprite2D
+signal dashSignal
+signal shootSignal
 const PLAYER_BULLET = preload("res://Scenes/player_bullet.tscn")
 var alive = true
-const DEFAULT_SPEED = 150
-const JUMP_VELOCITY = -300.0
+# Movement
+const maxSpeed = 120
+var onGround
+var desiredVelocity
+var maxSpeedChange
+var acceleration
+var maxAcceleration = 500
+var maxAirAcceleration = 400
+var deceleration 
+var maxDeceleration = 600
+var maxAirDeceleration = 400
+var turnSpeed
+var maxTurnSpeed = 800
+var maxAirTurnSpeed = 600
+const JUMP_VELOCITY = -250.0
+var desiredJump = false
+var newGravity
+var gravityScale = 980
+
 const dashSpeed = 250
 const dashDist = 50
 var dashing = false
 var dashStart = 0
-var speed = DEFAULT_SPEED
 var buffered = 0
 var jumping = false
 const grappleSpeed = 250
 var grappling = false
 var stoppingMomentum = false
+
 
 # when doing the ui use the cooldown timers for each of the abilities using the time_left function
 
@@ -38,7 +57,7 @@ func _physics_process(delta: float) -> void:
 		return
 	# Add gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += gravityScale * delta
 	
 	if alive == false:
 		velocity.x = 0
@@ -62,7 +81,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time.time_left != 0) and !jumping:
 		jump()
 	var direction := Input.get_axis("move_left", "move_right")
-	move(direction)
+	move(direction, delta)
 	flip(direction)
 	if direction != 0 and is_on_floor(): # if not idle
 		animated_sprite.play("running")
@@ -74,16 +93,29 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
+		emit_signal("shootSignal")
 
 func jump():
 	velocity.y = JUMP_VELOCITY
 	jumping = true
 
-func move(direction):
-	if direction:
-		velocity.x = direction * DEFAULT_SPEED
-	elif !grappling: # if grappling keep grappling velocity
-		velocity.x = move_toward(velocity.x, 0, DEFAULT_SPEED)
+func move(direction, delta):
+	desiredVelocity = Vector2(direction, 0) * maxSpeed
+	onGround = is_on_floor()
+	acceleration = maxAcceleration if onGround else maxAirAcceleration
+	deceleration = maxDeceleration if onGround else maxAirDeceleration
+	turnSpeed = maxTurnSpeed if onGround else maxAirTurnSpeed
+	if direction != 0:
+		if (direction < 0 and velocity.x > 0) or (direction > 0 and velocity.x < 0): # if turning
+			maxSpeedChange = turnSpeed * delta
+		else: # if not turning
+			maxSpeedChange = acceleration * delta
+	else: 
+		maxSpeedChange = deceleration * delta
+		
+	velocity.x = move_toward(velocity.x, desiredVelocity.x, maxSpeedChange)
+
+
 func flip(direction):
 	if direction < 0:
 		animated_sprite.scale.x = -1
@@ -102,6 +134,7 @@ func timeSlow():
 func dash():
 	if dashing == false:# only play the dash animation the first time its pressed
 		animated_sprite.play("dash")
+		emit_signal("dashSignal")
 	dashing = true
 	velocity.x = animated_sprite.scale.x * dashSpeed # by using scale.x player still dashes in the direction they are facing when standing still
 	velocity.y = 0
