@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm2dv2pr3iopw"]
+[gd_scene load_steps=5 format=3 uid="uid://bm2dv2pr3iopw"]
 
 [ext_resource type="Script" path="res://scripts/camera_change.gd" id="1_5oghs"]
 [ext_resource type="Texture2D" uid="uid://coqinxwqaldwx" path="res://Assets/Level Tilesets/Icon_Tileset.png" id="2_x7tbp"]
+[ext_resource type="PackedScene" uid="uid://305i65m1rusl" path="res://Scenes/health_bar.tscn" id="3_655xr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c54qo"]
 normal = Vector2(1, 0)
@@ -28,7 +29,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldown" type="Node2D" parent="."]
-position = Vector2(-152, 76)
+position = Vector2(-152, 56)
 
 [node name="BackgroundCircle" type="Sprite2D" parent="DashCooldown"]
 texture = ExtResource("2_x7tbp")
@@ -41,7 +42,7 @@ region_enabled = true
 region_rect = Rect2(-0.0184612, 34.5939, 16.1709, 11.5942)
 
 [node name="shootCooldown" type="Node2D" parent="."]
-position = Vector2(-122, 76)
+position = Vector2(-122, 56)
 
 [node name="BackgroundCircle" type="Sprite2D" parent="shootCooldown"]
 texture = ExtResource("2_x7tbp")
@@ -55,7 +56,7 @@ region_enabled = true
 region_rect = Rect2(0.92076, 19.9691, 13.0815, 10.0592)
 
 [node name="slowmoCooldown" type="Node2D" parent="."]
-position = Vector2(-92, 76)
+position = Vector2(-92, 56)
 
 [node name="BackgroundCircle" type="Sprite2D" parent="slowmoCooldown"]
 texture = ExtResource("2_x7tbp")
@@ -67,6 +68,9 @@ position = Vector2(-1, -1)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.475, 0.329, 13.196, 16.095)
+
+[node name="HealthBar" parent="." instance=ExtResource("3_655xr")]
+position = Vector2(-140, 87)
 
 [connection signal="body_entered" from="RightBoundary2" to="." method="_on_right_boundary_2_body_entered"]
 [connection signal="body_entered" from="LeftBoundary2" to="." method="_on_left_boundary_2_body_entered"]

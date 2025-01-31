@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://305i65m1rusl"]
+
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="1_3ccuq"]
+[ext_resource type="Texture2D" uid="uid://cc1k6rfmhlhda" path="res://Assets/Animation Tilesets/Animated Tileset - Laser Gate.png" id="2_u42kc"]
+
+[node name="HealthBar" type="Node2D"]
+position = Vector2(-140, 0)
+script = ExtResource("1_3ccuq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 5.406, 0, 1)
+position = Vector2(140, 0)
+rotation = 1.5708
+scale = Vector2(5, 10)
+texture = ExtResource("2_u42kc")
+region_enabled = true
+region_rect = Rect2(10.9819, 20.0296, 2.03499, 27.9587)
+
+[node name="timeTillDeath" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="timeTillDeath" to="." method="_on_time_till_death_timeout"]

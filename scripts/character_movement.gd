@@ -127,8 +127,6 @@ func doAJump():
 		jumpSpeed += abs(velocity.y)
 	velocity.y += -jumpSpeed
 	jumping = true
-	await get_tree().create_timer(0.2).timeout
-	print(position)
 	
 
 func move(direction, delta):
