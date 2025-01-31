@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://xbtkp1qi3akn"]
+[gd_scene load_steps=23 format=4 uid="uid://xbtkp1qi3akn"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_48phw"]
 [ext_resource type="Texture2D" uid="uid://bw2ngbudddbhv" path="res://Assets/Level Tilesets/Tileset - Structural.png" id="2_6a8mg"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dtiucsjdertji" path="res://Assets/Textures/spotlight.png" id="9_bv68i"]
 [ext_resource type="PackedScene" uid="uid://bxrg6ojhtnrw4" path="res://Scenes/stability_pickup.tscn" id="9_c3yxm"]
 [ext_resource type="PackedScene" uid="uid://bsfp1rddw4bax" path="res://Scenes/change_camera.tscn" id="10_irjgh"]
+[ext_resource type="PackedScene" uid="uid://yjd7q0jqhxk1" path="res://Scenes/player_info.tscn" id="16_nfhxt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odbpw"]
 texture = ExtResource("2_6a8mg")
@@ -558,3 +559,5 @@ position = Vector2(0, -24)
 
 [node name="Player" parent="." instance=ExtResource("3_6dwv1")]
 position = Vector2(-70, 25)
+
+[node name="Player Info" parent="." instance=ExtResource("16_nfhxt")]
