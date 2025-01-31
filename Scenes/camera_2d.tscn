@@ -69,17 +69,17 @@ texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.92076, 19.9691, 13.0815, 10.0592)
 
-[node name="slowmoCooldown" type="Node2D" parent="."]
+[node name="grappleCooldown" type="Node2D" parent="."]
 position = Vector2(-132, 89)
 scale = Vector2(0.8, 0.8)
 
-[node name="BackgroundCircle" type="Sprite2D" parent="slowmoCooldown"]
+[node name="BackgroundCircle" type="Sprite2D" parent="grappleCooldown"]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.468, 47.946, 23.056, 23.131)
 
-[node name="stopwatchIcon" type="Sprite2D" parent="slowmoCooldown"]
+[node name="stopwatchIcon" type="Sprite2D" parent="grappleCooldown"]
 position = Vector2(-1, 0)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_x7tbp")

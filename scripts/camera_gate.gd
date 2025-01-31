@@ -64,7 +64,7 @@ func _physics_process(delta):
 		
 
 func changeGateState(direction): # direction is positive for up or negative for down
-	var perTickAmount = 0.02 * Engine.time_scale
+	var perTickAmount = 0.1 * Engine.time_scale
 	if static_body_2d.scale.y > 0.2 && direction > 0:
 		static_body_2d.scale.y  -= perTickAmount * 0.5
 	elif static_body_2d.scale.y < 1:

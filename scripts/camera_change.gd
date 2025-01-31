@@ -4,7 +4,7 @@ extends Camera2D
 @onready var timer = $Timer2
 @onready var dash_cooldown = $DashCooldown
 @onready var shoot_cooldown = $shootCooldown
-@onready var slowmo_cooldown = $slowmoCooldown
+@onready var grapple_cooldown = $grappleCooldown
 @onready var stability_bar = $StabilityBar
 var scaleChange = Vector2(0.3, 0.3)
 var dashCooldownTime = 0.8
@@ -24,7 +24,6 @@ func _on_right_boundary_2_body_entered(body):
 		
 		position.x += 370
 		timer.start()
-
 func _on_left_boundary_2_body_entered(body):
 	if body.has_method("player") and timer.time_left == 0:
 		position.x -= 370

@@ -100,7 +100,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 10.0
+"speed": 50.0
 }]
 
 [sub_resource type="GDScript" id="GDScript_e0xlu"]
@@ -150,7 +150,6 @@ script = ExtResource("1_wxr2m")
 [node name="Gate" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -15.555)
 sprite_frames = SubResource("SpriteFrames_j6qhv")
-frame_progress = 1.0
 script = SubResource("GDScript_e0xlu")
 
 [node name="AlarmLight" type="Timer" parent="."]
