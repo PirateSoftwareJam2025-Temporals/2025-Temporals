@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://caapa6p80eydk"]
+[gd_scene load_steps=25 format=3 uid="uid://caapa6p80eydk"]
 
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_oitlh"]
 [ext_resource type="Texture2D" uid="uid://bh603q4jnt5pw" path="res://Assets/Animation Tilesets/Turret_Tileset.png" id="2_en7wx"]
 [ext_resource type="Texture2D" uid="uid://dtiucsjdertji" path="res://Assets/Textures/spotlight.png" id="3_8qeio"]
+[ext_resource type="AudioStream" uid="uid://cwx010uk1ngjp" path="res://Assets/SFX/TurretShoot.wav" id="4_aa1nw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqal8"]
 size = Vector2(42, 28)
@@ -204,12 +205,6 @@ polygon = PackedVector2Array(-89, 0, -86, 23, -77, 44, -63, 62, -44, 77, -23, 86
 [node name="Marker2D" type="Marker2D" parent="BulletSpawn"]
 position = Vector2(0, 23)
 
-[node name="Polygon2D2" type="Polygon2D" parent="BulletSpawn"]
-position = Vector2(0, 23)
-scale = Vector2(0.02, 0.02)
-color = Color(0.226167, 0.23, 0.2185, 1)
-polygon = PackedVector2Array(-89, 0, -86, 23, -77, 44, -63, 62, -44, 77, -23, 86, 0, 89, 23, 86, 45, 77, 63, 63, 77, 44, 86, 23, 89, 0, 86, -23, 77, -45, 63, -63, 45, -77, 23, -86, 0, -89, -23, -86, -45, -77, -63, -63, -77, -45, -86, -23)
-
 [node name="PointLight2D" type="PointLight2D" parent="BulletSpawn"]
 position = Vector2(0.999996, 30)
 scale = Vector2(0.348648, 0.342932)
@@ -219,6 +214,9 @@ energy = 0.7
 texture = ExtResource("3_8qeio")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="shootAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_aa1nw")
 
 [connection signal="timeout" from="fireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="reloadSpeed" to="." method="_on_reload_speed_timeout"]

@@ -6,6 +6,7 @@ extends Node2D
 @onready var fire_rate = $fireRate
 @onready var point_light_2d = $BulletSpawn/PointLight2D
 @onready var explosion_light = $explosionLight
+@onready var shoot_audio = $shootAudio
 @onready var reload_speed = $reloadSpeed
 
 var alreadyBeenHere = false
@@ -37,6 +38,7 @@ func _on_area_2d_body_exited(body):
 # need to delete bullets; after hitting something
 func fire():
 	canFire = false
+	shoot_audio.play()
 	burstCounter += 1 # add this bullet to the burstCount
 	fire_rate.start() # start the timer for the next bullet instance
 	var bullet = bulletPath.instantiate() # create a new instance of a bullet
