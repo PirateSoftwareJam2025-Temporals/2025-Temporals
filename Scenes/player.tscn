@@ -1,7 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccqg5v6n6851q"]
+[gd_scene load_steps=24 format=3 uid="uid://ccqg5v6n6851q"]
 
 [ext_resource type="Script" path="res://scripts/character_movement.gd" id="1_2nvis"]
 [ext_resource type="Texture2D" uid="uid://bmtr8ljnf5e7q" path="res://Assets/Animation Tilesets/Animated Tileset - Player.png" id="2_v0bby"]
+[ext_resource type="AudioStream" uid="uid://dqsc3xljl6q1h" path="res://Assets/SFX/Dash.wav" id="3_s6ij4"]
+[ext_resource type="AudioStream" uid="uid://celnemwqmdqwt" path="res://Assets/SFX/Shoot.wav" id="4_eogat"]
+[ext_resource type="AudioStream" uid="uid://bqrobmnjh2va" path="res://Assets/SFX/jump.wav" id="5_fikxl"]
+[ext_resource type="AudioStream" uid="uid://fv4v8ldnpr86" path="res://Assets/SFX/footsteps.wav" id="6_3t7nq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fmcox"]
 atlas = ExtResource("2_v0bby")
@@ -170,6 +174,10 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="shootCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="grappleLength" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -178,3 +186,19 @@ one_shot = true
 
 [node name="grappleCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_s6ij4")
+volume_db = -10.12
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_eogat")
+volume_db = -10.12
+
+[node name="jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fikxl")
+volume_db = -10.12
+
+[node name="footsteps" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_3t7nq")
+volume_db = -10.12

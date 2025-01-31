@@ -15,6 +15,7 @@ func _ready():
 			child.connect("stabilityPickup", stabilityPickup)
 	player.connect("dashSignal", dash)
 	player.connect("shootSignal", shoot)
+	player.connect("grappleSignal", grapple)
 	camera_2d.connect("death", die)
 	
 func playerGrapple(position):
@@ -29,6 +30,10 @@ func shoot():
 	if camera_2d.has_method("shoot"):
 		camera_2d.shoot()
 
+func grapple():
+	if camera_2d.has_method("grapple"):
+		camera_2d.grapple()
+	
 func die():
 	get_tree().reload_current_scene()
 

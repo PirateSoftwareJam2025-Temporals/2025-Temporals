@@ -21,7 +21,7 @@ var disabled = false
 func _process(delta):
 	if bodyEntered == true:
 		rotateTowards(barrel, newBody.position)
-		if canFire == true:
+		if canFire == true and !disabled:
 			fire()
 
 func _on_area_2d_body_entered(body):
@@ -62,7 +62,8 @@ func _on_fire_rate_timeout():
 		canFire = true
 	else:
 		reload_speed.start()
-
-func disable():
+func disableTurret():
 	disabled = true
-	pass
+	barrel.visible = false
+	
+	
