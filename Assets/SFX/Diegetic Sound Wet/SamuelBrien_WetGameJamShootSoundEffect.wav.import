@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bwao7erl2crox"
+path="res://.godot/imported/SamuelBrien_WetGameJamShootSoundEffect.wav-d176e51ec8c27d8533270c8f6c47385b.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Diegetic Sound Wet/SamuelBrien_WetGameJamShootSoundEffect.wav"
+dest_files=["res://.godot/imported/SamuelBrien_WetGameJamShootSoundEffect.wav-d176e51ec8c27d8533270c8f6c47385b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
