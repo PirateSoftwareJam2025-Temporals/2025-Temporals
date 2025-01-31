@@ -12,7 +12,6 @@ func _physics_process(delta):
 func bullet():
 	pass
 
-
 func _on_area_2d_body_entered(body):
 	print(body)
 	if body.get_parent().has_method("disable"): # the body collided with will be the collidor
@@ -21,4 +20,11 @@ func _on_area_2d_body_entered(body):
 		
 	# delete bullet
 	queue_free()
+	pass # Replace with function body.
+
+
+func _on_area_2d_area_entered(area):
+	if area.get_parent().has_method("disableTurret") and area.get_node("hitbox"): # the body collided with will be the collidor
+		area.get_parent().disableTurret()
+		print("booom?")
 	pass # Replace with function body.

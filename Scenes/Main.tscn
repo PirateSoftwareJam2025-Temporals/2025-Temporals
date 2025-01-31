@@ -494,6 +494,9 @@ position = Vector2(102, -30)
 [node name="GrappleNode2" parent="GameObjects" instance=ExtResource("8_hl7ye")]
 position = Vector2(-100, -34)
 
+[node name="GrappleNode3" parent="GameObjects" instance=ExtResource("8_hl7ye")]
+position = Vector2(13, -30)
+
 [node name="stabilityPickup" parent="GameObjects" instance=ExtResource("9_c3yxm")]
 position = Vector2(93, 28)
 pickupAmount = 10.0
