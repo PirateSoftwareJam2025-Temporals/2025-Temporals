@@ -156,8 +156,10 @@ wait_time = 0.1
 one_shot = true
 
 [node name="coyoteTime" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
 one_shot = true
 
 [node name="grappleCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="variableJump" type="Timer" parent="."]

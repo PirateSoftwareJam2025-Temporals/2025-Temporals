@@ -1,5 +1,5 @@
 extends CharacterBody2D
-@onready var player_ = $"."
+
 @onready var grapple_cooldown_timer = $grappleCooldown
 @onready var stop_momentum_timer = $stopMomentum
 @onready var coyote_time = $coyoteTime
@@ -16,14 +16,14 @@ var onGround
 var desiredVelocity
 var maxSpeedChange
 var acceleration
-var maxAcceleration = 500
+var maxAcceleration = 700
 var maxAirAcceleration = 400
 var deceleration 
-var maxDeceleration = 600
-var maxAirDeceleration = 400
+var maxDeceleration = 800
+var maxAirDeceleration = 600
 var turnSpeed
-var maxTurnSpeed = 800
-var maxAirTurnSpeed = 600
+var maxTurnSpeed = 1000
+var maxAirTurnSpeed = 700
 # Jump
 const jumpHeight = 50 ** 2 # jump height times timeToJumpApex * 10
 var desiredJump = false
@@ -57,7 +57,6 @@ func _process(delta):
 
 
 func _physics_process(delta: float) -> void:
-	velocity = player_.velocity
 	onGround = is_on_floor()
 	
 	if dashing:
@@ -95,7 +94,10 @@ func _physics_process(delta: float) -> void:
 	# jump if coyote available and not currently jumping
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time.time_left != 0) and !jumping:
 		desiredJump = true
-	
+		if is_on_floor() == false:
+			print("coyote")
+			#velocity.y = 0
+
 	
 	# Horizontal Movement
 	var direction := Input.get_axis("move_left", "move_right")
@@ -116,17 +118,18 @@ func _physics_process(delta: float) -> void:
 	if (desiredJump):
 		doAJump()
 		return
-	
-	
-	
-	
 
 
 func doAJump():
 	desiredJump = false
-	jumpSpeed = sqrt(sqrt(-2 * defaultGravity * gravityScale * jumpHeight))
+	jumpSpeed = sqrt(sqrt(abs(-2 * defaultGravity * gravityScale * jumpHeight)))
+	if (velocity.y > 0): # if falling; ensures coyote jump is as high
+		jumpSpeed += abs(velocity.y)
 	velocity.y += -jumpSpeed
 	jumping = true
+	await get_tree().create_timer(0.2).timeout
+	print(position)
+	
 
 func move(direction, delta):
 	desiredVelocity = Vector2(direction, 0) * maxSpeed
