@@ -28,7 +28,6 @@ wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldown" type="Node2D" parent="."]
-modulate = Color(0, 0.745355, 0.729398, 1)
 position = Vector2(-152, 76)
 
 [node name="BackgroundCircle" type="Sprite2D" parent="DashCooldown"]
@@ -40,6 +39,34 @@ region_rect = Rect2(0.468, 47.946, 23.056, 23.131)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(-0.0184612, 34.5939, 16.1709, 11.5942)
+
+[node name="shootCooldown" type="Node2D" parent="."]
+position = Vector2(-122, 76)
+
+[node name="BackgroundCircle" type="Sprite2D" parent="shootCooldown"]
+texture = ExtResource("2_x7tbp")
+region_enabled = true
+region_rect = Rect2(0.468, 47.946, 23.056, 23.131)
+
+[node name="gunIcon" type="Sprite2D" parent="shootCooldown"]
+position = Vector2(-1, 1)
+texture = ExtResource("2_x7tbp")
+region_enabled = true
+region_rect = Rect2(0.92076, 19.9691, 13.0815, 10.0592)
+
+[node name="slowmoCooldown" type="Node2D" parent="."]
+position = Vector2(-92, 76)
+
+[node name="BackgroundCircle" type="Sprite2D" parent="slowmoCooldown"]
+texture = ExtResource("2_x7tbp")
+region_enabled = true
+region_rect = Rect2(0.468, 47.946, 23.056, 23.131)
+
+[node name="stopwatchIcon" type="Sprite2D" parent="slowmoCooldown"]
+position = Vector2(-1, -1)
+texture = ExtResource("2_x7tbp")
+region_enabled = true
+region_rect = Rect2(0.475, 0.329, 13.196, 16.095)
 
 [connection signal="body_entered" from="RightBoundary2" to="." method="_on_right_boundary_2_body_entered"]
 [connection signal="body_entered" from="LeftBoundary2" to="." method="_on_left_boundary_2_body_entered"]
