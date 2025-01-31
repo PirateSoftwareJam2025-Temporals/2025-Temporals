@@ -22,12 +22,16 @@ func _process(delta):
 func _on_right_boundary_2_body_entered(body):
 	if body.has_method("player") and timer.time_left == 0:
 		
-		position.x += 380
+		position.x += 370
 		timer.start()
 
 func _on_left_boundary_2_body_entered(body):
 	if body.has_method("player") and timer.time_left == 0:
-		position.x -= 380
+		position.x -= 370
+		timer.start()
+func _on_bottom_boundary_body_entered(body):
+	if body.has_method("player") and timer.time_left == 0:
+		position.y += 208
 		timer.start()
 
 func dash():

@@ -5,7 +5,7 @@
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_f4f3s"]
 b = Vector2(16, 6.99382e-07)
 
-[node name="stopCamera" type="Area2D"]
+[node name="changeCamera" type="Area2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_ogroh")

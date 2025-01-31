@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm2dv2pr3iopw"]
+[gd_scene load_steps=6 format=3 uid="uid://bm2dv2pr3iopw"]
 
 [ext_resource type="Script" path="res://scripts/camera_change.gd" id="1_5oghs"]
 [ext_resource type="Texture2D" uid="uid://coqinxwqaldwx" path="res://Assets/Level Tilesets/Icon_Tileset.png" id="2_x7tbp"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c54qo"]
 normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_shl4o"]
+distance = -106.0
 
 [node name="Camera2D" type="Camera2D"]
 zoom = Vector2(3.462, 3.462)
@@ -23,6 +26,11 @@ shape = SubResource("WorldBoundaryShape2D_c54qo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary2"]
 position = Vector2(-189, -3)
 shape = SubResource("WorldBoundaryShape2D_c54qo")
+
+[node name="BottomBoundary" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBoundary"]
+shape = SubResource("WorldBoundaryShape2D_shl4o")
 
 [node name="Timer2" type="Timer" parent="."]
 wait_time = 0.2
@@ -83,3 +91,4 @@ position = Vector2(-114, 89)
 
 [connection signal="body_entered" from="RightBoundary2" to="." method="_on_right_boundary_2_body_entered"]
 [connection signal="body_entered" from="LeftBoundary2" to="." method="_on_left_boundary_2_body_entered"]
+[connection signal="body_entered" from="BottomBoundary" to="." method="_on_bottom_boundary_body_entered"]

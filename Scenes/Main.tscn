@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://br5gwx2wf2svd" path="res://Scenes/platform.tscn" id="8_txcax"]
 [ext_resource type="Texture2D" uid="uid://dtiucsjdertji" path="res://Assets/Textures/spotlight.png" id="9_bv68i"]
 [ext_resource type="PackedScene" uid="uid://bxrg6ojhtnrw4" path="res://Scenes/stability_pickup.tscn" id="9_c3yxm"]
-[ext_resource type="PackedScene" uid="uid://bsfp1rddw4bax" path="res://Scenes/stop_camera.tscn" id="10_irjgh"]
+[ext_resource type="PackedScene" uid="uid://bsfp1rddw4bax" path="res://Scenes/change_camera.tscn" id="10_irjgh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odbpw"]
 texture = ExtResource("2_6a8mg")
