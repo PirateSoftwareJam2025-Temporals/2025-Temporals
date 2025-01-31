@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3err28ls02r5"]
+[gd_scene load_steps=3 format=3 uid="uid://b3err28ls02r5"]
 
 [ext_resource type="AudioStream" uid="uid://c3vj0ijsvtoj2" path="res://Assets/Music/SamuelBrien_GameJamComposition.wav" id="1_k1y2x"]
+[ext_resource type="AudioStream" uid="uid://c4r338t5iqbeh" path="res://Assets/SFX/ambientNoise.wav" id="2_4t1qv"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_k1y2x")
 autoplay = true
 bus = &"Music"
 playback_type = 1
+
+[node name="Ambience" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_4t1qv")
+volume_db = 20.235
+autoplay = true

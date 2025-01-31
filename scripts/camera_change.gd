@@ -9,8 +9,10 @@ extends Camera2D
 var scaleChange = Vector2(0.3, 0.3)
 var dashCooldownTime = 0.8
 var shootCooldownTime = 0.5
-var slowMoCooldownTime = 0.8
+var grappleCooldownTime = 1.0
 var playerAlive = true
+var increments
+var scaleIncrements
 signal death
 func _ready():
 	stability_bar.connect("death", die)
@@ -47,11 +49,16 @@ func shoot():
 	changeScale(shoot_cooldown, shootCooldownTime)
 	await get_tree().create_timer(shootCooldownTime).timeout
 
+func grapple():
+	grapple_cooldown.scale = grapple_cooldown.scale - scaleChange # decrease the scale
+	changeScale(grapple_cooldown, grappleCooldownTime)
+	await get_tree().create_timer(grappleCooldownTime).timeout
 # slowly change the scale to alert the player when they can next use said ability
 func changeScale(object, length): 
-	var increments = length/10
-	var scaleIncrements = scaleChange/10
+	increments = length / 10
+	scaleIncrements = scaleChange/10
 	for i in 10:
+		
 		object.scale += scaleIncrements
 		await get_tree().create_timer(increments).timeout
 

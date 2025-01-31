@@ -13,7 +13,6 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.has_method("player"):
-		print("the player has entered")
 		modulate = Color(0.353, 1, 0.408)
 		entered = true
 		if Input.is_action_just_pressed("grapple"):

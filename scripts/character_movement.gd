@@ -1,6 +1,11 @@
 extends CharacterBody2D
 
+@onready var dashAudio = $Dash
+@onready var shootAudio = $Shoot
+@onready var jumpAudio = $jump
+@onready var footstepsAudio = $footsteps
 @onready var grapple_cooldown_timer = $grappleCooldown
+@onready var shoot_cooldown_timer = $shootCooldown
 @onready var grapple_length = $grappleLength
 @onready var stop_momentum_timer = $stopMomentum
 @onready var coyote_time = $coyoteTime
@@ -10,6 +15,7 @@ extends CharacterBody2D
 signal dashSignal
 signal shootSignal
 signal playerPosition
+signal grappleSignal
 const PLAYER_BULLET = preload("res://Scenes/player_bullet.tscn")
 var alive = true
 # Movement
@@ -171,21 +177,26 @@ func timeSlow():
 func dash():
 	if dashing == false:# only play the dash animation the first time its pressed
 		animated_sprite.play("dash")
+		dashAudio.play()
 		emit_signal("dashSignal")
 	dashing = true
 	velocity.x = animated_sprite.scale.x * dashSpeed # by using scale.x player still dashes in the direction they are facing when standing still
 	velocity.y = 0
 	dashStart = position.x
 func shoot():
+	if shoot_cooldown_timer.time_left != 0: # don't shoot unless the cooldown is up
+		return
+	shoot_cooldown_timer.start()
 	var playerDirection = animated_sprite.scale.x
 	var bullet = PLAYER_BULLET.instantiate()
+	shootAudio.play()
 	add_child(bullet)
 	bullet.top_level = true # do not alter the bullets position when the player moves
 	bullet.global_position = marker_2d.global_position
 	bullet.velocity.x = playerDirection
 	bullet.velocity.y = 0
 	bullet.bulletSpeed = 200
-	
+
 func grapple(nodePosition):
 	if grapple_cooldown_timer.time_left != 0:
 		return
@@ -195,6 +206,6 @@ func grapple(nodePosition):
 		velocity.y += abs(velocity.y)
 	var directionVector = nodePosition - global_position
 	velocity += directionVector.normalized() * grappleSpeed
-	#grappleNodePosition = nodePosition
+	emit_signal("grappleSignal")
 	grapple_length.start()
 	grapple_cooldown_timer.start()

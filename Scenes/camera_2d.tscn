@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm2dv2pr3iopw"]
+[gd_scene load_steps=7 format=3 uid="uid://bm2dv2pr3iopw"]
 
 [ext_resource type="Script" path="res://scripts/camera_change.gd" id="1_5oghs"]
 [ext_resource type="Texture2D" uid="uid://coqinxwqaldwx" path="res://Assets/Level Tilesets/Icon_Tileset.png" id="2_x7tbp"]
+[ext_resource type="Texture2D" uid="uid://nq2xcj4qvoko" path="res://Assets/Animation Tilesets/Grapple_Icon.png" id="3_0wmm3"]
 [ext_resource type="PackedScene" uid="uid://305i65m1rusl" path="res://Scenes/stability_bar.tscn" id="3_655xr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c54qo"]
@@ -79,11 +80,10 @@ texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.468, 47.946, 23.056, 23.131)
 
-[node name="stopwatchIcon" type="Sprite2D" parent="grappleCooldown"]
-position = Vector2(-1, 0)
+[node name="grappleIcon" type="Sprite2D" parent="grappleCooldown"]
+position = Vector2(-0.47, -0.585)
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_x7tbp")
-region_enabled = true
+texture = ExtResource("3_0wmm3")
 region_rect = Rect2(0.475, 0.329, 13.196, 16.095)
 
 [node name="StabilityBar" parent="." instance=ExtResource("3_655xr")]
