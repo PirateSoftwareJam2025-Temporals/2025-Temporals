@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxrg6ojhtnrw4"]
+
+[ext_resource type="Script" path="res://scripts/stability_pickup.gd" id="1_2h86b"]
+[ext_resource type="Texture2D" uid="uid://coqinxwqaldwx" path="res://Assets/Level Tilesets/Icon_Tileset.png" id="2_nqpl6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmpbt"]
+radius = 14.0
+
+[node name="stabilityPickup" type="Area2D"]
+script = ExtResource("1_2h86b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_jmpbt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.248657, 0.945777, 0.236536, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_nqpl6")
+region_enabled = true
+region_rect = Rect2(0, 47.9456, 23.0558, 23.1313)

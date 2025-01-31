@@ -11,7 +11,7 @@ signal shootSignal
 const PLAYER_BULLET = preload("res://Scenes/player_bullet.tscn")
 var alive = true
 # Movement
-const maxSpeed = 120
+const maxSpeed = 100
 var onGround
 var desiredVelocity
 var maxSpeedChange

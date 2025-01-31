@@ -5,7 +5,7 @@ extends Camera2D
 @onready var dash_cooldown = $DashCooldown
 @onready var shoot_cooldown = $shootCooldown
 @onready var slowmo_cooldown = $slowmoCooldown
-@onready var health_bar = $HealthBar
+@onready var stability_bar = $StabilityBar
 var scaleChange = Vector2(0.3, 0.3)
 var dashCooldownTime = 0.8
 var shootCooldownTime = 0.5
@@ -13,7 +13,7 @@ var slowMoCooldownTime = 0.8
 
 signal death
 func _ready():
-	health_bar.connect("death", die)
+	stability_bar.connect("death", die)
 func die():
 	emit_signal("death")
 
@@ -30,15 +30,15 @@ func _on_left_boundary_2_body_entered(body):
 		timer.start()
 
 func dash():
-	if health_bar.has_method("dash"):
-		health_bar.dash()
+	if stability_bar.has_method("dash"):
+		stability_bar.dash()
 	dash_cooldown.scale = dash_cooldown.scale - scaleChange
 	changeScale(dash_cooldown, dashCooldownTime)
 	await get_tree().create_timer(dashCooldownTime).timeout
 
 func shoot():
-	if health_bar.has_method("shoot"):
-		health_bar.shoot()
+	if stability_bar.has_method("shoot"):
+		stability_bar.shoot()
 	shoot_cooldown.scale = shoot_cooldown.scale - scaleChange
 	changeScale(shoot_cooldown, shootCooldownTime)
 	await get_tree().create_timer(shootCooldownTime).timeout
