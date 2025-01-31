@@ -34,7 +34,10 @@ func _on_bottom_boundary_body_entered(body):
 	if body.has_method("player") and timer.time_left == 0:
 		position.y += 208
 		timer.start()
-
+func _on_top_boundary_body_entered(body):
+	if body.has_method("player") and timer.time_left == 0:
+		position.y -= 208
+		timer.start()
 func dash():
 	if stability_bar.has_method("dash"):
 		stability_bar.dash()

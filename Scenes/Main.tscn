@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dtiucsjdertji" path="res://Assets/Textures/spotlight.png" id="9_bv68i"]
 [ext_resource type="PackedScene" uid="uid://bxrg6ojhtnrw4" path="res://Scenes/stability_pickup.tscn" id="9_c3yxm"]
 [ext_resource type="PackedScene" uid="uid://bsfp1rddw4bax" path="res://Scenes/change_camera.tscn" id="10_irjgh"]
-[ext_resource type="PackedScene" uid="uid://yjd7q0jqhxk1" path="res://Scenes/player_info.tscn" id="16_nfhxt"]
+[ext_resource type="PackedScene" path="res://Scenes/player_info.tscn" id="16_nfhxt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odbpw"]
 texture = ExtResource("2_6a8mg")
@@ -457,7 +457,7 @@ sources/0 = SubResource("TileSetAtlasSource_sxqsy")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1vagh"]
 distance = -97.0
 
-[node name="root" type="Node"]
+[node name="root2" type="Node"]
 script = ExtResource("1_48phw")
 
 [node name="TileMapLayers" type="Node" parent="."]
