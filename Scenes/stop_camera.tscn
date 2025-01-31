@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsfp1rddw4bax"]
+
+[ext_resource type="Script" path="res://scripts/stop_camera.gd" id="1_ogroh"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_f4f3s"]
+b = Vector2(16, 6.99382e-07)
+
+[node name="stopCamera" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_ogroh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("SegmentShape2D_f4f3s")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

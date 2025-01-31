@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://br5gwx2wf2svd" path="res://Scenes/platform.tscn" id="8_txcax"]
 [ext_resource type="Texture2D" uid="uid://dtiucsjdertji" path="res://Assets/Textures/spotlight.png" id="9_bv68i"]
 [ext_resource type="PackedScene" uid="uid://bxrg6ojhtnrw4" path="res://Scenes/stability_pickup.tscn" id="9_c3yxm"]
+[ext_resource type="PackedScene" uid="uid://bsfp1rddw4bax" path="res://Scenes/stop_camera.tscn" id="10_irjgh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odbpw"]
 texture = ExtResource("2_6a8mg")
@@ -447,9 +448,6 @@ texture = ExtResource("2_5037p")
 [sub_resource type="TileSet" id="TileSet_yimng"]
 sources/0 = SubResource("TileSetAtlasSource_sxqsy")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eykt6"]
-distance = -144.0
-
 [sub_resource type="Animation" id="Animation_by118"]
 length = 0.001
 tracks/0/type = "bezier"
@@ -536,16 +534,23 @@ position = Vector2(113, -71)
 [node name="GrappleNode2" parent="GameObjects" instance=ExtResource("8_hl7ye")]
 position = Vector2(-12, -107)
 
-[node name="Area2D" type="Area2D" parent="GameObjects"]
-position = Vector2(632, -27)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameObjects/Area2D"]
-rotation = 1.5708
-shape = SubResource("WorldBoundaryShape2D_eykt6")
-
 [node name="stabilityPickup" parent="GameObjects" instance=ExtResource("9_c3yxm")]
 position = Vector2(632, -27)
 pickupAmount = 20.0
+
+[node name="stopCamera" parent="GameObjects" instance=ExtResource("10_irjgh")]
+position = Vector2(0, 129)
+scale = Vector2(1, 15)
+
+[node name="stopCamera2" parent="GameObjects" instance=ExtResource("10_irjgh")]
+position = Vector2(357, 128)
+scale = Vector2(1, 15)
+
+[node name="stopCamera3" parent="GameObjects" instance=ExtResource("10_irjgh")]
+position = Vector2(-82, -45)
+rotation = 1.55286
+scale = Vector2(1, 15)
+cameraDirection = false
 
 [node name="Platform" parent="GameObjects" instance=ExtResource("8_txcax")]
 position = Vector2(179, 5)
@@ -577,8 +582,8 @@ color = Color(0.477902, 0.507533, 0.520132, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
 shape = SubResource("WorldBoundaryShape2D_1vagh")
 
-[node name="Player" parent="." instance=ExtResource("3_6dwv1")]
+[node name="Camera2D" parent="." instance=ExtResource("4_ykxnm")]
+position = Vector2(0, 9)
+zoom = Vector2(3.462, 3.462)
 
-[node name="Camera2D" parent="Player" instance=ExtResource("4_ykxnm")]
-position = Vector2(32, 19)
-zoom = Vector2(2, 2)
+[node name="Player" parent="." instance=ExtResource("3_6dwv1")]

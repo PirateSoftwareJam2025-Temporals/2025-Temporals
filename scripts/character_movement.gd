@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 signal dashSignal
 signal shootSignal
+signal playerPosition
 const PLAYER_BULLET = preload("res://Scenes/player_bullet.tscn")
 var alive = true
 # Movement
@@ -45,14 +46,14 @@ var buffered = 0
 const grappleSpeed = 250
 var grappling = false
 var stoppingMomentum = false
-
-
 # when doing the ui use the cooldown timers for each of the abilities using the time_left function
 
 func player():
 	pass #function check whether a body is the player
 
 func _process(delta):
+	
+	emit_signal("playerPosition", position)
 	pass
 
 

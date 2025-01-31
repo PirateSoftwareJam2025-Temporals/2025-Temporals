@@ -50,3 +50,9 @@ func changeScale(object, length):
 	for i in 10:
 		object.scale += scaleIncrements
 		await get_tree().create_timer(increments).timeout
+
+func followPlayer(playerPosition, direction):
+	if direction:
+		position.x = playerPosition.x
+	elif !direction:
+		position.y = playerPosition.y
