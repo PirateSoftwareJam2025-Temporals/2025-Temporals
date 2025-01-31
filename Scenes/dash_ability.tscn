@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3rrw35mcyf0c"]
+
+[ext_resource type="Script" path="res://Scripts/ability.gd" id="1_brfyx"]
+[ext_resource type="Texture2D" uid="uid://coqinxwqaldwx" path="res://Assets/Level Tilesets/Icon_Tileset.png" id="2_iqdjr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmfcu"]
+radius = 11.0
+
+[node name="dash ability" type="Area2D"]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_brfyx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jmfcu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.52549, 0.717647, 0.929412, 1)
+texture = ExtResource("2_iqdjr")
+region_enabled = true
+region_rect = Rect2(0, 48, 23, 23)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D2"]
+texture = ExtResource("2_iqdjr")
+region_enabled = true
+region_rect = Rect2(0, 35, 16, 11)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

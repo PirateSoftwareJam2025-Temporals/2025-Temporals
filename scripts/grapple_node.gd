@@ -6,7 +6,7 @@ var mouseEntered = false
 signal grapple
 # enable button functionality
 func _physics_process(delta):
-	if Input.is_action_just_pressed("grapple") and entered:
+	if Input.is_action_just_pressed("grapple") and entered && PlayerInfo.grappleHook:
 		emit_signal("grapple", global_position)
 		# need to pass this nodes position when called
 

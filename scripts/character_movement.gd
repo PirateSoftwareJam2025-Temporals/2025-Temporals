@@ -114,11 +114,11 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("running")
 	else:
 		animated_sprite.play("default")
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") && PlayerInfo.hasDash:
 		dash()
 	timeSlow()
 	move_and_slide()
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") && PlayerInfo.hasGun:
 		shoot()
 		emit_signal("shootSignal")
 	

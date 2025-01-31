@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://drrbhigta8vrt"]
+
+[ext_resource type="Script" path="res://scripts/grapple_ability.gd" id="1_nc1a1"]
+[ext_resource type="Texture2D" uid="uid://coqinxwqaldwx" path="res://Assets/Level Tilesets/Icon_Tileset.png" id="2_ydmn5"]
+[ext_resource type="Texture2D" uid="uid://sfnnemgt6q2x" path="res://Assets/Animation Tilesets/Grapple_Icon.png" id="3_tbhe8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmfcu"]
+radius = 11.0
+
+[node name="grappleAbility" type="Area2D"]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_nc1a1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jmfcu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_ydmn5")
+region_enabled = true
+region_rect = Rect2(0, 48, 23, 23)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D2"]
+texture = ExtResource("3_tbhe8")
+region_enabled = true
+region_rect = Rect2(0, 0, 11, 13)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
