@@ -8,7 +8,7 @@
 normal = Vector2(1, 0)
 
 [node name="Camera2D" type="Camera2D"]
-zoom = Vector2(3, 3)
+zoom = Vector2(3.462, 3.462)
 script = ExtResource("1_5oghs")
 
 [node name="RightBoundary2" type="Area2D" parent="."]
@@ -29,48 +29,57 @@ wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldown" type="Node2D" parent="."]
-position = Vector2(-152, 56)
+position = Vector2(-171, 89)
+scale = Vector2(0.8, 0.8)
 
 [node name="BackgroundCircle" type="Sprite2D" parent="DashCooldown"]
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.468, 47.946, 23.056, 23.131)
 
 [node name="DashIcon" type="Sprite2D" parent="DashCooldown"]
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(-0.0184612, 34.5939, 16.1709, 11.5942)
 
 [node name="shootCooldown" type="Node2D" parent="."]
-position = Vector2(-122, 56)
+position = Vector2(-151, 89)
+scale = Vector2(0.8, 0.8)
 
 [node name="BackgroundCircle" type="Sprite2D" parent="shootCooldown"]
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.468, 47.946, 23.056, 23.131)
 
 [node name="gunIcon" type="Sprite2D" parent="shootCooldown"]
 position = Vector2(-1, 1)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.92076, 19.9691, 13.0815, 10.0592)
 
 [node name="slowmoCooldown" type="Node2D" parent="."]
-position = Vector2(-92, 56)
+position = Vector2(-132, 89)
+scale = Vector2(0.8, 0.8)
 
 [node name="BackgroundCircle" type="Sprite2D" parent="slowmoCooldown"]
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.468, 47.946, 23.056, 23.131)
 
 [node name="stopwatchIcon" type="Sprite2D" parent="slowmoCooldown"]
-position = Vector2(-1, -1)
+position = Vector2(-1, 0)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_x7tbp")
 region_enabled = true
 region_rect = Rect2(0.475, 0.329, 13.196, 16.095)
 
 [node name="StabilityBar" parent="." instance=ExtResource("3_655xr")]
-position = Vector2(-140, 87)
+position = Vector2(-114, 89)
 
 [connection signal="body_entered" from="RightBoundary2" to="." method="_on_right_boundary_2_body_entered"]
 [connection signal="body_entered" from="LeftBoundary2" to="." method="_on_left_boundary_2_body_entered"]

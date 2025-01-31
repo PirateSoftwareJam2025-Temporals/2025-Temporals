@@ -25,7 +25,6 @@ func _on_right_boundary_2_body_entered(body):
 		position.x += 380
 		timer.start()
 
-
 func _on_left_boundary_2_body_entered(body):
 	if body.has_method("player") and timer.time_left == 0:
 		position.x -= 380
@@ -58,3 +57,6 @@ func followPlayer(playerPosition, direction):
 		position.x = playerPosition.x
 	elif !direction:
 		position.y = playerPosition.y
+
+func stabilityPickup(pickupAmount):
+	stability_bar.stabilityPickup(pickupAmount)

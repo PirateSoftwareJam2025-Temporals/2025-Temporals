@@ -3,15 +3,16 @@ extends Node
 @onready var game_objects = $GameObjects
 @onready var camera_2d = $Camera2D
 
-var cameraFollow = true
+var cameraFollow = false
 var cameraDirection
 func _ready():
 	for child in game_objects.get_children():
 		if child is grappleNode:
 			child.connect("grapple", playerGrapple)
-	for child in game_objects.get_children():
 		if child is changeCameraNode:
 			child.connect("changeCameraMode", changeCameraMode)
+		if child is stabilityPickup:
+			child.connect("stabilityPickup", stabilityPickup)
 	player.connect("dashSignal", dash)
 	player.connect("shootSignal", shoot)
 	camera_2d.connect("death", die)
@@ -36,6 +37,8 @@ func changeCameraMode(direction):
 	cameraDirection = direction
 	print(cameraDirection)
 
+func stabilityPickup(pickupAmount):
+	camera_2d.stabilityPickup(pickupAmount)
 func _process(delta):
 	if cameraFollow:
 		player.connect("playerPosition", cameraFollowPlayer)

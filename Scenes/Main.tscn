@@ -488,13 +488,6 @@ position = Vector2(-130, -31)
 [node name="CameraGate" parent="GameObjects" instance=ExtResource("5_pcy30")]
 position = Vector2(-182, 47.545)
 
-[node name="Turret" parent="GameObjects" instance=ExtResource("6_t7n22")]
-position = Vector2(267, -62)
-
-[node name="Turret2" parent="GameObjects" instance=ExtResource("6_t7n22")]
-position = Vector2(751, 92.085)
-rotation = -3.14118
-
 [node name="GrappleNode" parent="GameObjects" instance=ExtResource("8_hl7ye")]
 position = Vector2(102, -30)
 
@@ -502,12 +495,8 @@ position = Vector2(102, -30)
 position = Vector2(-100, -34)
 
 [node name="stabilityPickup" parent="GameObjects" instance=ExtResource("9_c3yxm")]
-position = Vector2(632, -27)
-pickupAmount = 20.0
-
-[node name="stopCamera" parent="GameObjects" instance=ExtResource("10_irjgh")]
-position = Vector2(0, 129)
-scale = Vector2(1, 15)
+position = Vector2(93, 28)
+pickupAmount = 10.0
 
 [node name="stopCamera2" parent="GameObjects" instance=ExtResource("10_irjgh")]
 position = Vector2(1447, 287)
@@ -517,9 +506,23 @@ scale = Vector2(1, 15)
 position = Vector2(632, 20)
 scale = Vector2(1.5, 1)
 
+[node name="Platform3" parent="GameObjects" instance=ExtResource("8_txcax")]
+position = Vector2(712, -12)
+scale = Vector2(1.5, 1)
+
+[node name="Platform4" parent="GameObjects" instance=ExtResource("8_txcax")]
+position = Vector2(887, -27)
+scale = Vector2(1.5, 1)
+
+[node name="Turret" parent="GameObjects" instance=ExtResource("6_t7n22")]
+position = Vector2(1028, 145)
+
 [node name="Platform2" parent="GameObjects" instance=ExtResource("8_txcax")]
 position = Vector2(586, -12)
 scale = Vector2(1.48, 1)
+
+[node name="Turret2" parent="GameObjects" instance=ExtResource("6_t7n22")]
+position = Vector2(1257, 100)
 
 [node name="Lighting" type="Node2D" parent="."]
 visible = false
@@ -540,12 +543,13 @@ rotation = 0.187015
 color = Color(0.477902, 0.507533, 0.520132, 1)
 
 [node name="DeathPlane" parent="." instance=ExtResource("4_4fwo6")]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathPlane"]
 shape = SubResource("WorldBoundaryShape2D_1vagh")
 
 [node name="Camera2D" parent="." instance=ExtResource("4_ykxnm")]
 position = Vector2(0, -24)
-zoom = Vector2(3.462, 3.462)
 
 [node name="Player" parent="." instance=ExtResource("3_6dwv1")]
+position = Vector2(-70, 25)

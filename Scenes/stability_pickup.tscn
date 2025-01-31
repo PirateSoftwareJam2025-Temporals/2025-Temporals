@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxrg6ojhtnrw4"]
+[gd_scene load_steps=5 format=3 uid="uid://bxrg6ojhtnrw4"]
 
 [ext_resource type="Script" path="res://scripts/stability_pickup.gd" id="1_2h86b"]
 [ext_resource type="Texture2D" uid="uid://coqinxwqaldwx" path="res://Assets/Level Tilesets/Icon_Tileset.png" id="2_nqpl6"]
+[ext_resource type="AudioStream" uid="uid://cd50povpcblym" path="res://Assets/SFX/AbilityPickup.wav" id="3_ybu38"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmpbt"]
 radius = 14.0
 
 [node name="stabilityPickup" type="Area2D"]
+scale = Vector2(1.06, 1.06)
 script = ExtResource("1_2h86b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -19,3 +21,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nqpl6")
 region_enabled = true
 region_rect = Rect2(0, 47.9456, 23.0558, 23.1313)
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ybu38")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

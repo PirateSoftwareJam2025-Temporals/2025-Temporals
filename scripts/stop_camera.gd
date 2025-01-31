@@ -7,3 +7,4 @@ signal changeCameraMode
 func _on_area_entered(area):
 	if area.get_parent().has_method("player"):
 		emit_signal("changeCameraMode", cameraDirection)
+	

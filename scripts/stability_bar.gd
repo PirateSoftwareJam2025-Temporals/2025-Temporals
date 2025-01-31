@@ -25,7 +25,12 @@ func decayStability():
 #func _process(delta):
 	#scale.x = time_till_death.time_left/timerLength
 
-
+func stabilityPickup(pickupAmount):
+	var newStability = currentStability + pickupAmount
+	if newStability > maxStability:
+		currentStability = maxStability
+	else:
+		currentStability = newStability
 
 func dash():
 	currentStability -= maxStability * dashPercent
