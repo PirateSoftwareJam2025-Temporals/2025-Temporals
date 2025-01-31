@@ -159,10 +159,5 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="stopMomentum" type="Timer" parent="."]
-wait_time = 0.1
-
 [node name="grappleCooldown" type="Timer" parent="."]
 one_shot = true
-
-[connection signal="timeout" from="stopMomentum" to="." method="_on_stop_momentum_timeout"]

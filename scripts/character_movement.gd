@@ -25,15 +25,15 @@ var turnSpeed
 var maxTurnSpeed = 800
 var maxAirTurnSpeed = 600
 # Jump
-const jumpHeight = 1000.0
+const jumpHeight = 50 ** 2 # jump height times timeToJumpApex * 10
 var desiredJump = false
 var newGravity
 var defaultGravity = 980
-var gravityScale = 980
+var gravityScale
 var gravMultiplier = 1
-var downwardMovementMultiplier = -1.6
-var jumpSpeed = 300
-var timeToJumpApex = 0.2
+var downwardMovementMultiplier = -1.5
+var jumpSpeed
+var timeToJumpApex = 0.3
 var jumping = false
 # Dash
 const dashSpeed = 250
@@ -59,10 +59,6 @@ func _process(delta):
 func _physics_process(delta: float) -> void:
 	velocity = player_.velocity
 	onGround = is_on_floor()
-	newGravity = Vector2(0, (-2 * jumpHeight) / (timeToJumpApex * timeToJumpApex))
-	gravityScale = ((newGravity.y*10) / defaultGravity) * gravMultiplier
-	if not is_on_floor():
-		velocity.y += gravityScale * delta
 	
 	if dashing:
 		timeSlow() # playing should still be able to time slow while dashing
@@ -72,7 +68,14 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	# Add gravity.
-	
+	newGravity = Vector2(0, (-2 * jumpHeight) / (timeToJumpApex * timeToJumpApex))
+	gravityScale = ((newGravity.y*10) / defaultGravity) * gravMultiplier
+	if not is_on_floor():
+		velocity.y += gravityScale * delta
+	if (velocity.y == 0):
+		gravMultiplier = 1
+	if (velocity.y < -0.01):
+		gravMultiplier = downwardMovementMultiplier
 	
 	if alive == false:
 		velocity.x = 0
@@ -88,10 +91,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor(): # start a timer when last on the floor
 		coyote_time.start()
 		jumping = false
-		#if stoppingMomentum == false: # return to typical movement after grappling
-			#stop_momentum_timer.start()
-			#stoppingMomentum = true
-	
+
 	# jump if coyote available and not currently jumping
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time.time_left != 0) and !jumping:
 		desiredJump = true
@@ -114,14 +114,10 @@ func _physics_process(delta: float) -> void:
 		emit_signal("shootSignal")
 	
 	if (desiredJump):
-		print("jump")
 		doAJump()
 		return
 	
-	if (velocity.y == 0):
-		gravMultiplier = 1
-	if (velocity.y < -0.01):
-		gravMultiplier = downwardMovementMultiplier
+	
 	
 	
 
@@ -129,11 +125,6 @@ func _physics_process(delta: float) -> void:
 func doAJump():
 	desiredJump = false
 	jumpSpeed = sqrt(sqrt(-2 * defaultGravity * gravityScale * jumpHeight))
-	print(jumpSpeed)
-	#if (velocity.y > 0): # if jumping
-		#jumpSpeed = max(jumpSpeed - velocity.y, 0)
-	#elif velocity.y < 0:
-		#jumpSpeed += abs(velocity.y)
 	velocity.y += -jumpSpeed
 	jumping = true
 
@@ -186,19 +177,11 @@ func shoot():
 	bullet.velocity.x = playerDirection
 	bullet.velocity.y = 0
 	bullet.bulletSpeed = 200
-	print("bullet")
 	
 func grapple(nodePosition):
 	if grapple_cooldown_timer.time_left != 0:
 		return
-	grappling = true
+	#grappling = true
 	var directionVector = nodePosition - global_position
 	velocity += directionVector.normalized() * grappleSpeed
 	grapple_cooldown_timer.start()
-
-
-func _on_stop_momentum_timeout():
-	if is_on_floor(): # check if player is still on floor
-		grappling = false
-		stoppingMomentum = false
-	
