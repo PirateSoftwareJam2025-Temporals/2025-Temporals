@@ -10,13 +10,15 @@ var scaleChange = Vector2(0.3, 0.3)
 var dashCooldownTime = 0.8
 var shootCooldownTime = 0.5
 var slowMoCooldownTime = 0.8
-
+var playerAlive = true
 signal death
 func _ready():
 	stability_bar.connect("death", die)
 func die():
 	emit_signal("death")
-
+func _process(delta):
+	if !playerAlive:
+		stability_bar.playerAlive = false
 func _on_right_boundary_2_body_entered(body):
 	if body.has_method("player") and timer.time_left == 0:
 		

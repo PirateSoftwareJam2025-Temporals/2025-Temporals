@@ -41,7 +41,9 @@ func _process(delta):
 		player.connect("playerPosition", cameraFollowPlayer)
 	else:
 		player.disconnect("playerPosition", cameraFollowPlayer)
-		
+	
+	if player.alive == false:
+		camera_2d
 
 func cameraFollowPlayer(playerPosition):
 	camera_2d.followPlayer(playerPosition, cameraDirection)

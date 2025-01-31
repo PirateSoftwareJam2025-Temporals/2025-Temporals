@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var grapple_cooldown_timer = $grappleCooldown
+@onready var grapple_length = $grappleLength
 @onready var stop_momentum_timer = $stopMomentum
 @onready var coyote_time = $coyoteTime
 @onready var jump_buffer_timer = $jumpBuffer
@@ -45,6 +46,7 @@ var buffered = 0
 
 const grappleSpeed = 250
 var grappling = false
+var grappleNodePosition
 var stoppingMomentum = false
 # when doing the ui use the cooldown timers for each of the abilities using the time_left function
 
@@ -65,6 +67,10 @@ func _physics_process(delta: float) -> void:
 		if abs(dashStart - position.x) >= dashDist || get_real_velocity().x == 0:
 			dashing = false
 			return
+		move_and_slide()
+		return
+	if grapple_length.time_left != 0:
+		#await get_tree().create_timer(0.01).timeout # await a second for the first time to give it weight
 		move_and_slide()
 		return
 	# Add gravity.
@@ -183,7 +189,12 @@ func shoot():
 func grapple(nodePosition):
 	if grapple_cooldown_timer.time_left != 0:
 		return
-	#grappling = true
+	if (velocity.y > 0): # if falling; ensures coyote jump is as high
+		velocity.y -= abs(velocity.y)
+	elif velocity.y < 0:
+		velocity.y += abs(velocity.y)
 	var directionVector = nodePosition - global_position
 	velocity += directionVector.normalized() * grappleSpeed
+	#grappleNodePosition = nodePosition
+	grapple_length.start()
 	grapple_cooldown_timer.start()

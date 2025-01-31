@@ -170,7 +170,11 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="grappleCooldown" type="Timer" parent="."]
+[node name="grappleLength" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
 
 [node name="variableJump" type="Timer" parent="."]
+
+[node name="grappleCooldown" type="Timer" parent="."]
+one_shot = true
